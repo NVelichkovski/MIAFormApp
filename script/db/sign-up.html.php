@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<?php session_start(); ?>
+<?php
+session_start(); 
+?>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -10,9 +12,9 @@
 <body>
 
     <?php 
-    echo '<pre>';
-    var_dump($_SESSION);
-    echo '</pre>';
+    // echo '<pre>';
+    // var_dump($_SESSION);
+    // echo '</pre>';
     ?>
     <form action="add-user.php" method="post"> <br>
         <?php
