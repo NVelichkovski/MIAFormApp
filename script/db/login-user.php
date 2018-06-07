@@ -2,6 +2,16 @@
     require_once "connect.php";
     session_start();
 
+    //varchar(25) za sekoj token
+    function setRememberMeCookie()
+    {
+        $token=uniqid($_SESSION['id']);
+        $sql="UPDATE users SET token=$token WHERE id='".$_SESSION['id']."'";
+        if ($conn->query($sql)===TRUE) {
+            # code...
+        }    
+    }
+
     $email_username=$_POST['username_email'];
     $password= password_hash($_POST['password'], PASSWORD_BCRYPT);
 
@@ -24,7 +34,12 @@
         unset($_SESSION['state']);
     }
     $_SESSION['id']=$row['id'];
-    // echo "<script>console.log(\"id is set id=".$row['id']."\" session_id is set \$_SESSION['id']=".$_SESSION['id'].") </script>";
+    $_SESSION['username']=$row['username'];
+    $_SESSION['name']=$row['name'];
+    $_SESSION['surname']=$row['surname'];
+    $_SESSION['email']=$row['email'];
+
+    
     header("Location: user-page.html.php");
     exit();
     }

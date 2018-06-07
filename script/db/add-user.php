@@ -35,8 +35,13 @@ else{
         $sql="SELECT * FROM users WHERE email='$email'";
         $rez=$conn->query($sql);
         $row=mysqli_fetch_assoc($rez);
-        $_SESSION['id']= $row['id'];
-
+        
+        $_SESSION['id']=$row['id'];
+        $_SESSION['username']=$row['username'];
+        $_SESSION['name']=$row['name'];
+        $_SESSION['surname']=$row['surname'];
+        $_SESSION['email']=$row['email'];
+        
         
         $sql="CREATE TABLE {$username}_table_of_forms (id VARCHAR(25))";
             if ($conn->query($sql)===TRUE) {

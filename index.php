@@ -1,3 +1,3 @@
 <?php
-$str=uniqid(7);
+$str=uniqid();
 echo $str." with type ".gettype($str)." and length ".strlen($str);
