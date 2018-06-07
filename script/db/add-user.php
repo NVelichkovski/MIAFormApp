@@ -9,6 +9,7 @@ $name=$_POST['name'];
 $surname=$_POST['surname'];
 $password= password_hash($_POST['password'], PASSWORD_BCRYPT);
 
+
 $sql="SELECT * FROM users WHERE email='".$email."'";
 if (mysqli_num_rows($conn->query($sql)) != 0) {
     $_SESSION['state']="EMAIL_ALREADY_EXIST";
