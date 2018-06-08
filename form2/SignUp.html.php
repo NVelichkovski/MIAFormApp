@@ -3,14 +3,17 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
-    <link rel="import" href="all-scripts.html">  </head>
-    <link rel="stylesheet" href="logincss.css">
+    <link rel="import" href="all-scripts.html">
+  <link rel="stylesheet" href="signupcss.css">
+  </head>
   <body>
-  <?php
+    <?php
     if (isset($_SESSION['state'])) {
-      if ($_SESSION['state']=="EMAIL_OR_USERNAME_NOT_FOUND") {
-      echo '<script>
+      
+      if ($_SESSION['state']=="EMAIL_ALREADY_EXIST") {
+      echo '
+      
+      <script>
       toastr.options = {
         "closeButton": false,
         "debug": false,
@@ -28,13 +31,14 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
       }
-       document.onload=toastr["error"]("There is no account with this username or e-mail", "Error Signing up");
+      document.onload=toastr["error"]("There is already account with this email", "Error Signing up");
        </script>
        ';
       }
-      else if($_SESSION['state']=="INVALID_PASSWORD"){
+      else{
         echo '
-        <script>
+       
+      <script>
       toastr.options = {
         "closeButton": false,
         "debug": false,
@@ -52,22 +56,33 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
       }
-       document.onload=toastr["error"]("Incorect password", "Error Signing up");
+        document.onload=toastr["error"]("There is already account with this username", "Error Signing up");
        </script>
        ';
       }
     }
     ?>
-    <div id="part_one">
+
+<div id="part_one">
     </div>
 
     <div id="part_two">
       <div id="forma">
-        <form id="log_in" action="../script/login-user.php" method="post">
+        <form id="sign_up" action="../script/add-user.php" method="post">
           <br>
-          <span id="user_label">Username or e-mail</span>
+          <span id="fullname_label">Full Name</span>
           <br>
-          <input id="username_field" type="text" name="username_email" value="">
+          <input id="fullname_field" type="text" name="fullname" value="">
+          <br>
+          <br>
+          <span id="email_label">Email</span>
+          <br>
+          <input id="email_field" type="email" name="email" value="">
+          <br>
+          <br>
+          <span id="user_label">Username</span>
+          <br>
+          <input id="username_field" type="text" name="username" value="">
           <br>
           <br>
           <span id="pass_label">Password</span>
@@ -75,15 +90,15 @@
           <input id="pass_field" type="password" name="password" value="">
           <br>
           <br>
-          <input id="check" type="checkbox" name="remember_me" value=""> <span id="logged_in">Keep me logged in</span>
+          <span id="confirm_label">Confirm Password</span>
           <br>
-          <span id="forgot_pass">Forgot your password?</span>
-          <br>
-          <br>
-          <button id="login_button" type="submit" name="login">Login</button>
+          <input id="confirm_field" type="password" name="confirm_password" value="">
           <br>
           <br>
-         <a href="SignUp.html.php"><button id="signup_button" type="button" name="signup">Sign up</button></a> 
+          <br>
+          <a href="../script/add-user.php"><button id="create_button" type="button" name="create_account">Create Account</button></a>
+          <br>
+          <br>
         </form>
       </div>
     </div>

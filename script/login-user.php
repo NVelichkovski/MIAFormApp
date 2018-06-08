@@ -26,12 +26,12 @@
 
     if (mysqli_num_rows($rez)==0) {
         $_SESSION['state']="EMAIL_OR_USERNAME_NOT_FOUND";
-        header("Location: HTML_PROBA/log-in.html.php");
+        header("Location: ../form2/login.html.php");
         exit();
     }
     if (!password_verify($password,$row['password'])) {
         $_SESSION['state']="INVALID_PASSWORD";
-        header("Location: HTML_PROBA/log-in.html.php");
+        header("Location: ../form2/login.html.php");
         exit();
     }
     else{
