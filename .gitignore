@@ -1,4 +1,10 @@
 .zip
+<<<<<<< HEAD
 ignore/
 .idea/
 .vscode/
+=======
+.rar
+/.idea
+/.vscode
+>>>>>>> 02d7445838975791cdf012f45cb4da4e5342025a

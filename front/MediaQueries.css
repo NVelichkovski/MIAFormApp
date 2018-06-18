@@ -1,0 +1,341 @@
+@media only screen and (max-width: 600px)
+{
+  html, body {
+    height: 100%;
+    width: 100%;
+    background-image: url("part_one.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+
+    #part_one {
+    height: 0;
+    width: 0;
+    background-image: none;
+    transform: rotate(90deg);
+    }
+
+    #part_two, #part_one {
+    display: inline-block;
+    }
+
+    #part_two {
+    height: 100%;
+    width: 100%;
+    }
+
+    #forma {
+      background-color: rgba(255,255,255,0.87);
+      margin-left: 25%;
+    }
+
+    #username_label_2, #email_label_2, #fullname_label_2, #pass_label_2, #confirm_label_2
+    {
+      font-size: 15.5px;
+    }
+    #username_field, #pass_field, #username_field_2, #email_field_2, #fullname_field_2, #pass_field_2, #confirm_field_2 {
+      background-color: rgba(255,255,255, 0.25);
+    }
+
+    #username_field:focus, #pass_field:focus, #username_field_2:focus, #email_field_2:focus, #fullname_field_2:focus, #pass_field_2:focus, #confirm_field_2:focus {
+      background-color: rgba(255,255,255, 0.9);
+    }
+
+    #forma_2 {
+      background-color: rgba(255,255,255,0.87);
+      height: 80%;
+      width: 100%;
+      left: -115px;
+      top: -7.5px;
+    }
+
+    #create_button {
+      font-size: 15px;
+    }
+
+    #create_button:hover {
+      font-size: 16px;
+      padding: 4%;
+    }
+
+    #part_two_2
+    {
+      height: 100%;
+      width: 120%;
+    }
+
+    #back_login {
+      width: 25%;
+      margin-right: -5.5%;
+      text-transform: uppercase;
+      font-size: 15px;
+      margin-top: 5%;
+      position: relative;
+      display: inline-block;
+      background-color: rgba(255,255,255, 0.4);
+    }
+
+    #back_login:hover, #back_login:active {
+      width: 25%;
+      padding: 2%;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 767px)
+{
+  html, body {
+    height: 100%;
+    width: 100%;
+    background-image: url("part_one.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  #part_one {
+    height: 0;
+    width: 0;
+    background-image: none;
+    transform: rotate(90deg);
+  }
+
+  #part_two, #part_one {
+    display: inline-block;
+  }
+
+  #part_two {
+    height: 100%;
+    width: 100%;
+  }
+
+  #forma {
+    background-color: rgba(255,255,255,0.87);
+    margin-left: 24%;
+  }
+
+  #username_field, #pass_field, #username_field_2, #email_field_2, #fullname_field_2, #pass_field_2, #confirm_field_2 {
+    background-color: rgba(255,255,255, 0.25);
+  }
+
+  #un_field:focus, #pass_field:focus, #username_field_2:focus, #email_field_2:focus, #fullname_field_2:focus, #pass_field_2:focus, #confirm_field_2:focus {
+    background-color: rgba(255,255,255, 0.9);
+  }
+
+  #forma_2 {
+    background-color: rgba(255,255,255,0.87);
+    height: 83.5%;
+    width: 100%;
+    left: -105px;
+    top: -7.5px;
+  }
+
+  #part_two_2
+  {
+    height: 100%;
+    width: 100%;
+  }
+
+  #back_login {
+    width: 25%;
+    margin-right: -5.5%;
+    text-transform: uppercase;
+    font-size: 15px;
+    margin-top: 5%;
+    position: relative;
+    display: inline-block;
+    background-color: rgba(255,255,255, 0.4);
+  }
+
+  #back_login:hover, #back_login:active {
+    width: 25%;
+    padding: 2%;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px)
+{
+  html, body {
+    /*display: none;*/
+    height: 100%;
+    width: 100%;
+    background-image: url("part_one.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  #part_one {
+    height: 0%;
+    width: 0%;
+    background-image: none;
+    transform: rotate(90deg);
+  }
+
+  #part_two, #part_one {
+    display: inline-block;
+  }
+
+  #part_two {
+    height: 100%;
+    width: 80%;
+  }
+
+  #forma {
+    background-color: rgba(255,255,255,0.87);
+    margin-left: 12%;
+  }
+
+  #username_field, #pass_field, #username_field_2, #email_field_2, #fullname_field_2, #pass_field_2, #confirm_field_2 {
+    background-color: rgba(255,255,255, 0.25);
+  }
+
+  #username_field:focus, #pass_field:focus, #username_field_2:focus, #email_field_2:focus, #fullname_field_2:focus, #pass_field_2:focus, #confirm_field_2:focus {
+    background-color: rgba(255,255,255, 0.9);
+  }
+
+  #forma_2 {
+    background-color: rgba(255,255,255,0.87);
+    min-height: 88;
+    max-height: 92%;
+    width: 120%;
+    left: -105px;
+    top: -22.5px;
+    font-size: 14px;
+  }
+
+  #create_button {
+    padding: 2.5%;
+    font-size: 15px;
+  }
+
+  #create_button:hover {
+    padding: 3%;
+    font-size: 16px;
+  }
+
+  #part_two_2
+  {
+    height: 100%;
+    width: 80%;
+  }
+
+  #back_login {
+    width: 23%;
+    margin-right: -5.5%;
+    text-transform: uppercase;
+    font-size: 15px;
+    background-color: rgba(255,255,255, 0.4);
+  }
+
+  #back_login:hover, #back_login:active {
+    width: 23%;
+    padding: 2%;
+  }
+
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1260px)
+{
+  html, body {
+
+    height: 100%;
+    width: 100%;
+    background-image: url("part_one.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  #part_one {
+    height: 0%;
+    width: 0%;
+    background-image: none;
+    transform: rotate(90deg);
+  }
+
+  #part_two, #part_one {
+    display: inline-block;
+  }
+
+  #part_two {
+    height: 100%;
+    width: 70%;
+  }
+
+  #forma {
+    background-color: rgba(255,255,255,0.87);
+    margin-left: 4.5%;
+    margin-top: 12%;
+  }
+
+  #username_field, #pass_field, #username_field_2, #email_field_2, #fullname_field_2, #pass_field_2, #confirm_field_2 {
+    background-color: rgba(255,255,255, 0.25);
+  }
+
+  #username_field:focus, #pass_field:focus, #username_field_2:focus, #email_field_2:focus, #fullname_field_2:focus, #pass_field_2:focus, #confirm_field_2:focus {
+    background-color: rgba(255,255,255, 0.9);
+  }
+
+  #forma_2 {
+    background-color: rgba(255,255,255,0.87);
+    min-height: 88%;
+    max-height: 195%;
+    width: 80%;
+    left: -295px;
+    top: -38px;
+  }
+
+  #part_two_2
+  {
+    height: 100%;
+    width: 100%;
+  }
+
+  #back_login {
+    width: 23%;
+    margin-right: 10.5%;
+    text-transform: uppercase;
+    font-size: 15px;
+    background-color: rgba(255,255,255, 0.4);
+  }
+
+  #back_login:hover, #back_login:active {
+    width: 23%;
+    padding: 2%;
+  }
+
+  .strelka {
+    left: 177px;
+
+  }
+
+  #img1, #img2 {
+    top: -37.5px;
+    right: 68px;
+    opacity: 0.85;
+  }
+
+  .img_2 {
+    visibility: visible;
+    top: 2px;
+    opacity: 0.85;
+  }
+
+  #create_button {
+    padding: 1.8%;
+    font-size: 16px;
+  }
+
+  #create_button:hover {
+    padding: 2.3%;
+    font-size: 17px;
+  }
+
+  /*.strelka2 {
+    top: -68px;
+    left: 335px;
+  }
+
+  #email_tooltip_2 {
+    top: -102px;
+    left: 340px;
+  }*
+
+}

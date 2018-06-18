@@ -1,64 +1,44 @@
 <?php
 session_start();
-require_once "connect.php";
+require "db.php";
+require_once "variables.php";
 
+$_SESSION['state']=SIGN_UP;
 
-
-$email=$_POST['email'];
-$username=$_POST['username'];
 $name=$_POST['name'];
-$password= password_hash($_POST['password'], PASSWORD_BCRYPT);
+$email=strtoupper($_POST['email']);
+$username=strtoupper($_POST['username']);
+$password=password_hash($_POST['password'], PASSWORD_BCRYPT);
 
+$isValidSignUp=true;
 
-$sql="SELECT * FROM users WHERE email='".$email."'";
-if (mysqli_num_rows($conn->query($sql)) != 0) {
-    $_SESSION['state']="EMAIL_ALREADY_EXIST";
-    header('Location: ../form2/signup.html.php');
-    exit();
-}
-
-$sql="SELECT * FROM users WHERE username='".$username."'";
-if (mysqli_num_rows($conn->query($sql)) != 0) {
-    $_SESSION['state']="USERNAME_ALREADY_EXIST";
-    echo '<pre>';
-    var_dump($_SESSION);
-    echo '</pre>';
-    header('Location: ../form2/signup.html.php');
-    exit();
-}
-else{
-        unset($_SESSION['state']);
-    
-    $sql="INSERT INTO users (email, username, name, password) VALUES ('".$email."', '".$username."', '".$name."', '".$password."')";
-    if ($conn->query($sql)===TRUE) {
-
-        $sql="SELECT * FROM users WHERE email='$email'";
-        $rez=$conn->query($sql);
-        $row=mysqli_fetch_assoc($rez);
-        
-        $_SESSION['id']=$row['id'];
-        $_SESSION['username']=$row['username'];
-        $_SESSION['name']=$row['name'];
-        $_SESSION['email']=$row['email'];
-        
-        
-        $sql="CREATE TABLE {$username}_table_of_forms (id VARCHAR(25))";
-            if ($conn->query($sql)===TRUE) {
-                mysqli_close($conn);
-                header("Location: HTML_PROBA/user-page.html.php");
-                die();
-            }else
-            { 
-                echo mysqli_error($conn);
-                die();
-            }
-        }
-        else
-        { 
-            echo mysqli_error($conn);
-            die();
+if (!isEmailUniqe($email)) {
+    $isValidSignUp=false;
+    if (!isset($_SESSION['errors'])) {
+        $_SESSION['errors']= array();
     }
-    mysqli_close($conn);
-   
+    array_push($_SESSION['errors'],EMAIL_EXIST);
 }
-mysqli_close($conn);
+
+if (!isUsernameUnique($username)) {
+    echo "Username prob";
+    $isValidSignUp=false;
+    if (!isset($_SESSION['errors'])) {
+        $_SESSION['errors']= array();
+    }
+    array_push($_SESSION['errors'],USERNAME_EXIST);
+}
+
+if ($isValidSignUp) {
+    addUser($email,$username,$name,$password);
+    $row = mysqli_fetch_assoc(getRowByUsername($username));
+    $_SESSION['user_info']= getRowByUsername($username);
+    createFormTable($username);
+    closeConnection();
+    header("Location: ../front/formlist.html.php");
+    exit();
+} else {
+    closeConnection();
+    header("Location: ../front/login_and_signup.html.php");
+    exit();
+}
