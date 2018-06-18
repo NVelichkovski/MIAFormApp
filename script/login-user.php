@@ -1,59 +1,56 @@
 <?php
-    session_start();
-    require_once "connect.php";
-    
+session_start();
+require "db.php";
+require_once "variables.php";
 
-    //Zoshto ne mi e deklarirano $conn dokolku go povikuvam do funkcija
-    //varchar(25) za sekoj token
-    // function setRememberMeCookie()
-    // {
-    //     require_once "connect.php";
-    //     $token=uniqid($_SESSION['id']);
-    //     $sql="UPDATE users SET token='$token' WHERE id='".$_SESSION['id']."'";
-    //     $conn->query($sql);  
-    //     echo "Error:".mysqli_error($conn);      
-    //     setcookie("remember_me",$token,time()+30*24*60*60*1000);
-    // }
-    // echo "<script>alert('cookie: ".isset($_COOKIE['remember_me'])?$_COOKIE['remember_me']:""."')</script>";
-    
-    $email_username=$_POST['username_email'];
-    // $password= password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $password=$_POST['password'];
+$_SESSION['state']=LOG_IN;
 
-    $sql="SELECT * FROM users WHERE username='".$email_username."' OR email='".$email_username."'";
-    $rez=$conn->query($sql);
-    $row = $rez->fetch_assoc();  
+    unset($_SESSION['errors']);
 
-    if (mysqli_num_rows($rez)==0) {
-        $_SESSION['state']="EMAIL_OR_USERNAME_NOT_FOUND";
-        header("Location: ../form2/login.html.php");
-        exit();
-    }
-    if (!password_verify($password,$row['password'])) {
-        $_SESSION['state']="INVALID_PASSWORD";
-        header("Location: ../form2/login.html.php");
-        exit();
-    }
-    else{
-        unset($_SESSION['state']);
-    
-        $_SESSION['id']=$row['id'];
-        $_SESSION['username']=$row['username'];
-        $_SESSION['name']=$row['name'];
-        $_SESSION['email']=$row['email'];
-       
-        
-        if (isset($_POST['remember_me'])) {
-            $token=uniqid($_SESSION['id']);
-            $sql="UPDATE users SET token='$token' WHERE id='".$_SESSION['id']."'";
-            $conn->query($sql);   
-            setcookie("remember_me", $token, time()+30*24*60*60*1000);
+
+
+$username_email=strtoupper($_POST['username_email']);
+$password=$_POST['password'];
+$_SESSION['remember_me']=isset($_POST['remember_me']);
+
+function setRememberMeCookie($id)
+{
+    $token = uniqid($id);
+    updateRememberMeToken($id, $token);
+    setcookie("remember_me", $token, time()+1000*60*60*24*15);
+}
+
+if (getRowByEmail($username_email)) {
+        if (emailAndPasswordMatch($username_email,$password)) {
+            $_SESSION['user_info']=getRowByEmail($username_email);
+            closeConnection();
+            header("Location: cookie-script.php");
+            exit();
         }
         else{
-            setcookie("remember_me","",time()-1000);
+            if (!isset($_SESSION['errors']))
+                $_SESSION['errors']= array();
+            array_push($_SESSION['errors'],INCORECT_PASSWORD);
         }
+}
+else if (getRowByUsername($username_email)) {
+        if (usernameAndPasswordMatch($username_email,$password)) {
+            $_SESSION['user_info']=getRowByUsername($username_email);
+            closeConnection();
+            header("Location: cookie-script.php");
+            exit();
+        }else
+        {
+            if (!isset($_SESSION['errors']))
+                $_SESSION['errors']= array();
+            array_push($_SESSION['errors'],INCORECT_PASSWORD);
+        }
+} else{
+    if (!isset($_SESSION['errors']))
+        $_SESSION['errors']= array();
+    array_push($_SESSION['errors'],USERNAME_EMAIL_NOT_FOUND);
+}
 
-        // echo "in login-user.php script";
-    header("Location: HTML_PROBA/user-page.html.php");
-    exit();
-    }   
+closeConnection();
+header("Location: ../front/LogIn_AND_SignUp.html.php");
+exit();

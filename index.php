@@ -1,15 +1,23 @@
 <?php
-    // require_once "script/connect.php";
-
-    // print_r($_COOKIE);
-    if (isset($_COOKIE['remember_me'])) {
-        $sql="SELECT * FROM users WHERE token='".$_COOKIE['remember_me']."'";
-        $row=mysql_fetch_assoc($conn->query($sql));
-        // echo "<br>The row:".print_r($row);
-        $_SESSION['id']=$row['id'];
-        $_SESSION['username']=$row['username'];
-        $_SESSION['name']=$row['name'];
-        $_SESSION['email']=$row['email'];
-       header("Location: script/html_proba/user-page.html.php");
+    session_start();
+    require_once "script/variables.php";
+    require_once "script/db.php";
+    if (isset($_SESSION['user_info'])&& isset($_SESSION['user_info']['id']))
+    {
+        header("Location: front/formlist.html.php");
+        exit();
     }
-    else header("Location: form2/login.html.php");
+    $_SESSION['state']=LOG_IN;
+
+    if (isset($_COOKIE['remember_me']))
+    {
+        $row=getRowByRememberMeToken($_COOKIE['remember_me']);
+        if ($row)
+        {
+            $_SESSION['user_info']=$row;
+            $_SESSION['remember_me']=true;
+            header("Location: script/cookie-script.php");
+        }
+    }
+   header("Location: front/LogIn_AND_SignUp.html.php");
+?>
