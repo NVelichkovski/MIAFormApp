@@ -1,0 +1,222 @@
+html, body {
+  /*height: 100%;
+  max-height: auto;
+  width: 100%;
+  margin: 0;*/
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background: linear-gradient(to bottom right, white, white, white, white, rgba(0,0,0,0.4));
+  background-repeat: no-repeat;
+  overflow: auto;
+}
+
+#part_one {
+  /*height: 100%;
+  max-height: 100%;
+  width: 50%;
+  background-image: url("part_one.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: rotate(90deg);*/
+  height: 100%;
+  width: 50%;
+  background-image: url("part_one.jpg");
+  background-size: cover;
+  background-position: left;
+  background-repeat: no-repeat;
+  transform: rotate(90deg);
+}
+
+#part_two, #part_one {
+  display: inline-block;
+}
+
+#part_two {
+  /*min-height: 100%;
+  max-height: 110;
+  min-width: 50%;
+  max-width: 80%;
+  background: linear-gradient(to bottom right, white, white, rgba(0,0,0,0.4));
+  float: right;*/
+
+  height: 100%;
+  width: 50%;
+  /*background: linear-gradient(to bottom right, white, white, rgba(0,0,0,0.4));*/
+  float: right;
+  position: relative;
+  display: inline;
+}
+
+#forma {
+  min-height: 60%;
+  width: 55%;
+  max-height: 100%;
+  border-radius: 3%;
+  box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.5);
+  margin: auto;
+  padding: 10px;
+  margin-top: 15%;
+  background-color: rgba(255,255,255,0.5);
+  margin-left: 15%;
+}
+
+#user_label, #pass_label {
+  text-align: left;
+  font-family: serif, "Times New Roman";
+  font-size: 20px;
+  letter-spacing: 2.5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  /*color: rgb(179, 0, 0);*/
+  color: rgba(102, 102, 102,0.85);
+}
+
+#username_field, #pass_field {
+  width: 80%;
+  padding: 2.5%;
+  margin-top: 3.5%;
+  /*border: solid 1.3px rgba(176, 0, 0, 0.5);*/
+  border-bottom: solid 2.7px rgba(176, 0, 0, 0.7);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+#username_field:focus, #pass_field:focus {
+  box-shadow: 4px 5px 3px rgba(77, 77, 51,0.6); /*rgba(204, 0, 0, 0.8);*/
+  border: 1.3px solid rgba(176, 0, 0, 0.7);
+  outline: none;
+  border-radius: 10px;
+  cursor: text;
+
+}
+
+#log_in {
+  margin-left: 6%;
+}
+
+#login_button, #signup_button {
+  border-radius: 12px;
+  border: none;
+  width: 87%;
+  padding: 2%;
+  background-color: rgba(179,0,0,0.75);
+  padding: 3%;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight:bold;
+  letter-spacing: 2.5px;
+  color: white;
+  outline: none;
+}
+
+#login_button:active, #login_button:hover, #signup_button:active, #signup_button:hover {
+  padding: 3.5%;
+  font-size: 17px;
+  background-color: rgba(179,0,0,0.9);
+}
+
+#logged_in {
+  color: grey;
+  font-size: 13.5px;
+  font-family: serif, "Times New Roman";
+  text-transform: uppercase;
+}
+
+#forgot_pass {
+  font-family: serif, "Times New Roman";
+  font-size: 15.5px;
+  color: grey;
+  margin-left: 24%;
+}
+
+#check {
+  margin-left: 21.5%;
+}
+
+#forgot_pass:hover {
+  text-decoration: underline;
+  font-size: 16px;
+  color: black;
+  cursor: pointer;
+}
+
+.tooltip {
+  border: 1px rgba(230, 0, 0, 0.6) solid;
+  outline: none;
+  background-color: rgba(230, 0, 0, 1);
+  border-radius: 6px;
+  border-width: thin;
+  width: 100%;
+  height: 15%;
+  text-align: center;
+  font-size: 15px;
+  font-style: normal;
+  font-family: sans-serif, "Times New Roman";
+  color: white;
+  font-weight: bold;
+  padding: 2.5%;
+  left: 90%;
+  position: relative;
+  top: -45px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1.5s;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0) scale(1.0, 1.0);
+  transform: translateZ(0);
+}
+
+.tt_div {
+  display: inline-block;
+  position: relative;
+  float: right;
+}
+
+.strelka {
+  visibility: hidden;
+  border: none none 1.5px 1.5px solid rgba(230, 0, 0, 0.8);
+  background-color: rgba(230, 0, 0, 1);
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: -25px;
+  left: 177px;
+  opacity: 0;
+  transition: opacity 1.5s;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0) scale(1.0, 1.0);
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0) scale(1.0, 1.0);
+  transform: translateZ(0);
+  transform: rotate(135deg);
+}
+
+#img1 {
+  height: 8%;
+  width: 8%;
+  float: right;
+  position: relative;
+  top: -32px;
+  right: 57px;
+  visibility: hidden;
+}
+
+#img2 {
+  height: 8%;
+  width: 8%;
+  float: right;
+  position: relative;
+  top: -32px;
+  right: 57px;
+  visibility: hidden;
+}
+
+#part_three {
+  display: none;
+  position: relative;
+  float: right;
+  height: 100%;
+  width: 50%;
+}

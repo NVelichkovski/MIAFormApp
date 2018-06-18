@@ -1,2 +1,4 @@
 .zip
-ignore/
+.rar
+/.idea
+/.vscode
