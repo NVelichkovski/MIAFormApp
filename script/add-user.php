@@ -31,10 +31,11 @@ if (!isUsernameUnique($username)) {
 
 if ($isValidSignUp) {
     addUser($email,$username,$name,$password);
-    $row = mysqli_fetch_assoc(getRowByUsername($username));
     $_SESSION['user_info']= getRowByUsername($username);
-    createFormTable($username);
+    createFormsTable($username);
     closeConnection();
+    var_dump($_POST);
+    var_dump($_SESSION);
     header("Location: ../front/formlist.html.php");
     exit();
 } else {

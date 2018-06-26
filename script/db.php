@@ -13,8 +13,10 @@ function closeConnection(){
 }
 
 function addUser(string $email, string $username, string $name, string $password)
-{   $addUserStmt=$GLOBALS['conn']->prepare("INSERT INTO users (email, username, name, password) VALUES (?, ?, ?, ?)");
-    $addUserStmt->bind_param("ssss", $email, $username, $name, $password);
+{   $addUserStmt=$GLOBALS['conn']->prepare("INSERT INTO users (email, username, name, password, hash_id) VALUES (?, ?, ?, ?, ?)");
+    $hash_id=uniqid($email);
+    $hash_id=hash('sha256',$hash_id);
+    $addUserStmt->bind_param("sssss", $email, $username, $name, $password, $hash_id);
     $addUserStmt->execute();
     $addUserStmt->close();
 
@@ -66,11 +68,11 @@ function getRowByEmail($email)
     $getRowByEmailStmt->close();
     return $return;
 }
-function createFormTable($username)
+function createFormsTable($username)
 {
     //CREATE TABLE `formappdatabase`.`form_table_sample` ( `id` INT NOT NULL AUTO_INCREMENT ,  `title` INT NOT NULL ,    PRIMARY KEY  (`id`)) ENGINE = MyISAM;
     $id=getRowByUsername($username)['id'];
-    $sql="CREATE TABLE form_table_{$id} ( `id` INT NOT NULL AUTO_INCREMENT ,  `form-title` VARCHAR(100) NOT NULL ,    PRIMARY KEY  (`id`)) ENGINE = MyISAM;";
+    $sql="CREATE TABLE `formappdatabase`.`form_table_{$id}` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,  `form-title` VARCHAR(100) NOT NULL ,  `hash-id` VARCHAR(130) NOT NULL ,    PRIMARY KEY  (`id`),    UNIQUE  (`hash-id`)) ENGINE = MyISAM";
     // $sql="CREATE TABLE form_table_{$id} (formName VARCHAR(100), id INT(11) )";
     $GLOBALS['conn']->query($sql);
 }
@@ -190,13 +192,17 @@ function updateEmail($id, $email){
 }
 
 function addForm($userId, $title){
-    $addFormStmt=$GLOBALS['conn']->prepare("INSERT INTO `form_table_{$userId}` ( `form-title` )
-    VALUES (?)");
-    $addFormStmt->bind_param("s",$title);
+    if ($addFormStmt=$GLOBALS['conn']->prepare("INSERT INTO `form_table_{$userId}` ( `form-title`, `hash-id` )
+    VALUES (?, ?)")) {
+    $hash_id=uniqid($userId);
+    $hash_id=hash('sha256',$userId);
+    $addFormStmt->bind_param("ss",$title, $hash_id);
     $addFormStmt->execute();
     $id=$GLOBALS['conn']->insert_id;
     $addFormStmt->close();
     return $id;
+    }
+    die("Error vo addForm(...)");
 }
 
 function getFormData($userId, $tableId)
@@ -204,4 +210,16 @@ function getFormData($userId, $tableId)
     $getFormDataStmt="SELECT * FROM form_table_{$userId}_{$tableId}";
     $rez=$GLOBALS['conn']->query($getFormDataStmt);
     return $rez;
+}
+
+function getFormHashById($userId,$formId)
+{
+    $sql="SELECT * FROM form_table_{$userId} WHERE id = {$formId}";
+    $row=mysqli_fetch_assoc($GLOBALS['conn']->query($sql));
+    return isset($row)?$row['hash-id']:false;
+}
+
+function createFormTable(Type $var = null)
+{
+    
 }
