@@ -68,8 +68,10 @@ function getRowByEmail($email)
 }
 function createFormTable($username)
 {
+    //CREATE TABLE `formappdatabase`.`form_table_sample` ( `id` INT NOT NULL AUTO_INCREMENT ,  `title` INT NOT NULL ,    PRIMARY KEY  (`id`)) ENGINE = MyISAM;
     $id=getRowByUsername($username)['id'];
-    $sql="CREATE TABLE form_table_{$id} (formName VARCHAR(20) )";
+    $sql="CREATE TABLE form_table_{$id} ( `id` INT NOT NULL AUTO_INCREMENT ,  `form-title` VARCHAR(100) NOT NULL ,    PRIMARY KEY  (`id`)) ENGINE = MyISAM;";
+    // $sql="CREATE TABLE form_table_{$id} (formName VARCHAR(100), id INT(11) )";
     $GLOBALS['conn']->query($sql);
 }
 
@@ -144,7 +146,8 @@ function updateForgotPasswordToken($id,$token){
     $updateForgotPasswordTokenStmt-> close();
     return $return;
 }
-function updatePasswordHash($id, $hash){
+function updatePassword($id, $password){
+    $hash=password_hash($password, PASSWORD_BCRYPT);
     $updatePasswordHashStmt=$GLOBALS['conn']->prepare("UPDATE users SET password=? WHERE id=?");
     $updatePasswordHashStmt->bind_param("ss", $hash, $id);
     $updatePasswordHashStmt->exicute();
@@ -184,4 +187,21 @@ function updateEmail($id, $email){
     }
     $updateEmailStmt->close();
     return $return;
+}
+
+function addForm($userId, $title){
+    $addFormStmt=$GLOBALS['conn']->prepare("INSERT INTO `form_table_{$userId}` ( `form-title` )
+    VALUES (?)");
+    $addFormStmt->bind_param("s",$title);
+    $addFormStmt->execute();
+    $id=$GLOBALS['conn']->insert_id;
+    $addFormStmt->close();
+    return $id;
+}
+
+function getFormData($userId, $tableId)
+{
+    $getFormDataStmt="SELECT * FROM form_table_{$userId}_{$tableId}";
+    $rez=$GLOBALS['conn']->query($getFormDataStmt);
+    return $rez;
 }

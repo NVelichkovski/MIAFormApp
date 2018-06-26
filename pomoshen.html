@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <script>
+        function alertValue(form) {
+            alert(form.radioGroup+" "+form.radioGroup.value);
+        }
+    </script>
+        <form onsubmit="alertValue(this)">
+                <input type="text" name="zdavo" id="">
+                <legend for="">Nekakov legend</legend>
+                <br><br>
+                <input type="text" name="zdavo" id="">
+                <label for="nekakva">Nekakov label</label>
+                <br><br>
+        
+                <input type="radio" name="radioGroup" value="1" id="id1">
+                <label for="id1">Prvo</label>
+                <input type="radio" name="radioGroup" value="2" id="id2">
+                <label for="id2">Vtoro</label>
+                <input type="radio" name="radioGroup" value="3" id="id3">
+                <ul class="radio_combo">
+
+                </ul>
+                <li>
+                <label for="id3">Treto</label>
+                <button type="submit">Submit</button>
+                </li>
+        </form>  
+        
+</body>
+</html>
