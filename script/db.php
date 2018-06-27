@@ -12,6 +12,9 @@ function closeConnection(){
 
 function addUser(string $email, string $username, string $name, string $password)
 {   $addUserStmt=$GLOBALS['conn']->prepare("INSERT INTO users (email, username, name, password, hash_id) VALUES (?, ?, ?, ?, ?)");
+    // if (!$addUserStmt) {
+    //     return false;
+    // }
     $hash_id=uniqid($email);
     $hash_id=hash('sha256',$hash_id);
     $addUserStmt->bind_param("sssss", $email, $username, $name, $password, $hash_id);
@@ -72,7 +75,8 @@ function createFormsTable($username)
     $id=getRowByUsername($username)['id'];
     $sql="CREATE TABLE `formappdatabase`.`form_table_{$id}` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,  `form-title` VARCHAR(100) NOT NULL ,  `hash-id` VARCHAR(130) NOT NULL ,    PRIMARY KEY  (`id`),    UNIQUE  (`hash-id`)) ENGINE = MyISAM";
     // $sql="CREATE TABLE form_table_{$id} (formName VARCHAR(100), id INT(11) )";
-    $GLOBALS['conn']->query($sql);
+    return $GLOBALS['conn']->query($sql);
+
 }
 
 function usernameAndPasswordMatch($username, $password)
@@ -96,6 +100,7 @@ function emailAndPasswordMatch($email, $password)
     
 }
 function getRowByRememberMeToken($token){
+    //Da se proveri shto kje se sluchi ako ne go najde tokenot
     $updateRememberMeTokenStmt=$GLOBALS['conn']->prepare("SELECT * FROM users WHERE token=?");
     $updateRememberMeTokenStmt->bind_param("s", $token);
     $updateRememberMeTokenStmt->execute();
@@ -200,7 +205,7 @@ function addForm($userId, $title){
     $addFormStmt->close();
     return $id;
     }
-    die("Error vo addForm(...)");
+    return false;
 }
 
 function getFormData($userId, $tableId)
@@ -223,12 +228,32 @@ function createFormTable($userId, $formId, $elementArray)
  foreach ($elementArray as $key => $value) {
      switch ($value[0]) {
          case TEXT_FIELD:
-             $sql.="element{$userId}_{$formId}_{$key} VARCHAR(150),";
+             $sql.=" element_{$userId}_{$formId}_{$key}_1 VARCHAR(200),";
              break;
          case TEXT_AREA:
-             $sql.="element{$userId}_{$formId}_{$key} VARCHAR(450),";
+             $sql.=" element_{$userId}_{$formId}_{$key}_2 VARCHAR(450),";
              break;
-         
+         case RADIO_BUTTON:
+             $sql.=" element_{$userId}_{$formId}_{$key}_3 VARCHAR(50),";
+             break;
+         case CHECK_BOX:
+            foreach ($value as $key2 => $value2) {
+                if ($key2==1||$key2==0) {
+                    continue;
+                }
+                $sql.=" element_{$userId}_{$formId}_{$key}_{$key2}_4 VARCHAR(50),";
+            }
+             break;
+         case EMAIL_FIELD:
+            $sql.=" element_{$userId}_{$formId}_{$key}_5 VARCHAR(100),";
+             break;
+         case DATE_FIELD:
+            $sql.=" element_{$userId}_{$formId}_{$key}_5 VARCHAR(10),";
+            break;
      }
  }
+    $sql=substr($sql, 0, -1);
+    $sql.=");";
+    // return $sql;
+    return $GLOBALS['conn']->query($sql);
 }

@@ -54,6 +54,8 @@ document.onload=toastr["error"]("'.$_message.'", "'.$_title.'");
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/toastr/build/toastr.min.js"></script>
     <link rel="stylesheet" href="../node_modules/toastr/build/toastr.min.css">
+    
+    <link rel="shortcut icon" href="form.ico">
 </head>
 <body>
 <!--LOGIN DEL-->

@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="FormList.css">
     <script src="Prikazi.js"> </script>
     <script src="Out.js"> </script>
+
+     <link rel="shortcut icon" href="form.ico">
 </head>
 <body>
 <div class="container">
@@ -55,8 +57,3 @@
     </div>
 
 </div>
-
-
-</body>
-<?php echo  print_r($_SESSION); ?>
-</html>
