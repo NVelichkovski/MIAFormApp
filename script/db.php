@@ -1,7 +1,5 @@
 <?php
-function phpAlert($msg) {
-    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
-}
+require_once "variables.php";
 
 $conn=new mysqli("localhost","root", "", "formappdatabase");
 if ($conn->connect_error) {
@@ -219,7 +217,18 @@ function getFormHashById($userId,$formId)
     return isset($row)?$row['hash-id']:false;
 }
 
-function createFormTable(Type $var = null)
+function createFormTable($userId, $formId, $elementArray)
 {
-    
+ $sql="CREATE TABLE form_table_{$userId}_{$formId} (";
+ foreach ($elementArray as $key => $value) {
+     switch ($value[0]) {
+         case TEXT_FIELD:
+             $sql.="element{$userId}_{$formId}_{$key} VARCHAR(150),";
+             break;
+         case TEXT_AREA:
+             $sql.="element{$userId}_{$formId}_{$key} VARCHAR(450),";
+             break;
+         
+     }
+ }
 }

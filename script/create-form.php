@@ -1,19 +1,14 @@
 <?php 
     session_start();
     require_once "db.php";
-    define("TEXT_FIELD",1,true);
-    define("TEXT_AREA",2,true);
-    define("RADIO_BUTTON",3,true);
-    define("CHECK_BOX",4,true);
-    define("EMAIL_FIELD",5,true);
-    define("DATE_FIELD",6,true);
+    require_once "variables.php";
     
     function textFieldCode($indexForm,$indexElement, $elementArray){
         $label=$elementArray[1];
         $identifier='element'.$_SESSION['user_info']['id'].'_'.$indexForm.'_'.$indexElement;
         return '<div class="form-element">
                     <legend for="'.$identifier.'">'.$label.'</legend>
-                    <input class="text-field" type="text" name="'.$identifier.'" id="'.$identifier.'" />
+                    <input class="text-field" type="text" name="'.$identifier.'_1" id="'.$identifier.'" />
                 </div>';
     }
 
@@ -22,7 +17,7 @@
         $identifier='element'.$_SESSION['user_info']['id'].'_'.$indexForm.'_'.$indexElement;
         return '<div class="form-element">
                     <legend for="'.$identifier.'">'.$label.'</legend>
-                    <input class="date-field" type="date" name="'.$identifier.'" id="'.$identifier.'" />
+                    <input class="date-field" type="date" name="'.$identifier.'_6" id="'.$identifier.'" />
                 </div>';
     }
 
@@ -31,7 +26,7 @@
         $identifier='element'.$_SESSION['user_info']['id'].'_'.$indexForm.'_'.$indexElement;
         return '<div class="form-element">
                     <legend for="'.$identifier.'">'.$label.'</legend>
-                    <input class="email-field" type="email" name="'.$identifier.'" id="'.$identifier.'" />
+                    <input class="email-field" type="email" name="'.$identifier.'_5" id="'.$identifier.'" />
                 </div>';
     }
 
@@ -40,7 +35,7 @@
         $identifier='element'.$_SESSION['user_info']['id'].'_'.$indexForm.'_'.$indexElement;
         return '<div class="form-element">
                     <legend for="'.$identifier.'">'.$label.'</legend>
-                    <textarea name="'.$identifier.'" id="'.$identifier.'" cols="30" rows="10">Zdravo</textarea>
+                    <textarea name="'.$identifier.'_2" id="'.$identifier.'" cols="30" rows="10">Zdravo</textarea>
                 </div>';
     }
 
@@ -56,7 +51,7 @@
             }
             $returnString.='
                 <li>
-                    <input class="radio-button" type="radio" name="'.$identifier.'" value="'.str_replace(" ","_",$value).'" id="'.$identifier."_".$key.'">
+                    <input class="radio-button" type="radio" name="'.$identifier.'_3" value="'.str_replace(" ","_",$value).'" id="'.$identifier."_".$key.'">
                     <label for="'.$identifier."_".$key.'">'.$label.'</label>
                 </li>';
         }
@@ -76,7 +71,7 @@
             }
             $returnString.='
                 <li>
-                    <input class="checkbox" type="checkbox" name="'.$identifier."/".$key.'" value="'.str_replace(" ","_",$value).'" id="'.$identifier."/".$key.'">
+                    <input class="checkbox" type="checkbox" name="'.$identifier."_4/".$key.'" value="'.str_replace(" ","_",$value).'" id="'.$identifier."/".$key.'">
                     <label for="'.$identifier."/".$key.'">'.$label.'</label>
                 </li>';
         }
@@ -162,6 +157,6 @@
     fwrite($file, $formString);
     fclose($file);
     closeConnection();
-    // header("Location: ../front/formlist.html.php");
+    header("Location: ../front/formlist.html.php");
 
    

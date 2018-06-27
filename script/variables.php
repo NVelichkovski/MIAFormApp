@@ -8,5 +8,9 @@
     define("LOG_IN",1,true);
     define("SIGN_UP",2,true);
 
-
-
+    define("TEXT_FIELD",1,true);
+    define("TEXT_AREA",2,true);
+    define("RADIO_BUTTON",3,true);
+    define("CHECK_BOX",4,true);
+    define("EMAIL_FIELD",5,true);
+    define("DATE_FIELD",6,true);
