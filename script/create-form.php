@@ -2,7 +2,6 @@
     session_start();
     require_once "db.php";
     require_once "variables.php";
-    
     function textFieldCode($indexForm,$indexElement, $elementArray){
         $label=$elementArray[1];
         $identifier='element_'.$_SESSION['user_info']['id'].'_'.$indexForm.'_'.$indexElement;
@@ -55,8 +54,8 @@
                     <label for="'.$identifier.'_3">'.$label.'</label>
                 </li>';
         }
-        $returnString.='</ul></div>';   
-        return $returnString;    
+        $returnString.='</ul></div>';
+        return $returnString;
     }
 
     function checkBoxCode($indexForm,$indexElement, $elementArray){
@@ -75,39 +74,58 @@
                     <label for="'.$identifier."_".$key.'_4">'.$label.'</label>
                 </li>';
         }
-        $returnString.='</ul></div>';   
-        return $returnString;    
+        $returnString.='</ul></div>';
+        return $returnString;
     }
-    
-    $formArray = array(
-        'title' => 'Form-Title',
-        'elements'=> array(
-            array(TEXT_FIELD, 'text field label'),
-            array(TEXT_AREA, 'text area label'),
-            array(
-                RADIO_BUTTON,
-                'Radio button label',
-                '1 radio button label',
-                '2 radio button label',
-                '3 radio button label'
-            ),
-            array(
-                CHECK_BOX,
-                'Check box label',
-                '1 combo box label',
-                '2 combo box label',
-                '3 combo box label'
-            ),
-            array(DATE_FIELD, "date field label"),
-            array(EMAIL_FIELD, "email field label")
-            )
-        );
+
+//    $formArray = array(
+//        'title' => 'Form-Title',
+//        'elements'=> array(
+//            array(TEXT_FIELD, 'text field label'),
+//            array(TEXT_AREA, 'text area label'),
+//            array(
+//                RADIO_BUTTON,
+//                'Radio button label',
+//                '1 radio button label',
+//                '2 radio button label',
+//                '3 radio button label'
+//            ),
+//            array(
+//                CHECK_BOX,
+//                'Check box label',
+//                '1 combo box label',
+//                '2 combo box label',
+//                '3 combo box label'
+//            ),
+//            array(DATE_FIELD, "date field label"),
+//            array(EMAIL_FIELD, "email field label")
+//            )
+//        );
+
+        $formArray=json_decode($_POST['form-array']);
+        if (!isset($formArray))
+        {
+            $_SESSION['error']="Form array is not set";
+            echo "false";
+//            header("Location: http://localhost/miaformapp/front/404/index.html.php");
+            exit();
+        }
         
-        $formId=addForm($_SESSION['user_info']['id'], $formArray['title']);
-        if(!createFormTable($_SESSION['user_info']['id'], $formId, $formArray['elements']));
-        die("ERROR with creating form");
-        
-        $arrayJSON=json_encode($formArray);
+        $formId=addFormInDb($_SESSION['user_info']['id'], $formArray['title']);
+//        echo "Form id is $formId <br>";
+        if (!$formId)
+        {
+            $_SESSION['error']=mysqli_error($conn)+$formId;
+//            header("Location: http://localhost/miaformapp/front/404/index.html.php");
+                echo "false";
+            exit();
+        }
+        $queryRez=createFormTable($_SESSION['user_info']['id'], $formId, $formArray['elements']);
+//        echo mysqli_error($conn);
+//        die("ERROR with creating form");
+//        echo "<br> Create form table result<br>";
+        var_dump($queryRez); echo "<br>";
+        $arrayJSON=$_POST['form-array'];
         $formString='
         <!DOCTYPE html>
     <html>
@@ -159,10 +177,12 @@
     </html> ';
    
     mkdir("../users/".$_SESSION['user_info']['hash_id']."/".$formHash, 0755, true);
-    $file = fopen("../users/".$_SESSION['user_info']['hash_id']."/".$formHash."/index.html", "w") or die("Unable to to create the form!");
+    $file = fopen("../users/".$_SESSION['user_info']['hash_id']."/".$formHash."/index.html.php.php", "w") or die("Unable to create the form!");
     fwrite($file, $formString);
     fclose($file);
+    $file=fopen("../users/".$_SESSION['user_info']['hash_id']."/".$formHash."/form.json", "w") or die("Unable to create the form");
+    fwrite($file,json_encode($formArray));
+    fclose($file);
     closeConnection();
-    header("Location: ../front/formlist.html.php");
-
+    echo 'true';
    

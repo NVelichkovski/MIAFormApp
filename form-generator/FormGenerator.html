@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>WebForms</title>
+
+    <link rel="stylesheet" href="FormGeneratorCSS.css">
+    <link rel="stylesheet" href="MediaQueries_FormGenerator.css">
+
+    <link rel="stylesheet" href="jquery-ui.min.css">
+    <script src="external/jquery/jquery.js"></script>
+    <script src="jquery-ui.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="clickTitle.js"></script>
+
+    <script src="jquery.js"></script>
+    <script src="jquery.nice-select.js"></script>
+    <link rel="stylesheet" href="nice-select.css">
+    <link rel="icon" href="form.ico">
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+      $('select').niceSelect();
+      $('select').niceSelect('update');
+    });
+    </script>
+
+    <link rel="stylesheet" href="../front/MediaQueries_Footer.css">
+  </head>
+  <body>
+    <div id="form_div">
+      <form id="custom_form" method="post">
+        <div id="content">
+          <textarea id="naslov" name="Title" rows="1" cols="40" placeholder="Title" onchange="updateTitle()"></textarea>
+          <br>
+        </div>
+        <div class="custom_form">
+
+        </div>
+      </form>
+      <br>
+      <div class="dodadi">
+        <select id="combobox" name="">
+          <option data-display="Select element">Select element</option>
+          <option value="1">Text field</option>
+          <option value="2">Radio button group</option>
+          <option value="3">Checkbox group</option>
+          <option value="4">Date</option>
+          <option value="5">E-mail</option>
+          <option value="6">Textarea</option>
+        </select>
+        <script src="array-creator.js"></script>
+        <script src="GetSelected.js"></script>
+        <button id="add_button" type="button" name="button">Add element</button>
+      </div>
+      <div class="buttons">
+        <input id="clear_button" type="button" name="clear" value="Clear">
+        <input id="done_button" type="button" name="done" value="Done">
+        <input id="cancel_button" type="button" name="cancel" value="Cancel">
+      </div>
+      <div class="button_submit">
+        <input id="submit_button" type="submit" name="submit" value="Submit">
+      </div>
+    </div>
+    <div class="additional_menu">
+      <input id="edit_button" type="button" name="edit" value="Edit">
+      <input id="save_button" type="button" name="edit" value="Save">
+      <input id="discard_button" type="button" name="edit" value="Discard">
+    </div>
+
+    <div class="dialog_background">
+
+   </div>
+
+   <div id="dialog" >
+     <span id="kolku">Enter the number of radio buttons: </span>
+     <input id="kolku_radio" type="text" name="br_radio" value="" size="15">
+     <br>
+     <span class="message_1">(Press ENTER to continue)</span>
+     <br>
+     <div class="radio_group">
+
+     </div>
+     <input id="generate" type="button" name="generate" value="Generate">
+     <input id="cancel_generate" type="button" name="cancel" value="Cancel">
+   </div>
+
+   <script type="text/javascript" src="vnesi_ime.js"></script>
+
+   <div id="dialog_check" >
+     <span id="kolku">Enter the number of checkboxes: </span>
+     <input id="kolku_check" type="text" name="br_radio" value="" size="15">
+     <br>
+     <span class="message">(Press ENTER to continue)</span>
+     <br>
+     <div class="check_group">
+
+     </div>
+     <input id="generate_check" type="button" name="generate" value="Generate">
+     <input id="cancel_generate_check" type="button" name="cancel" value="Cancel">
+   </div>
+
+   <script type="text/javascript" src="ime_checkbox.js"></script>
+   <br>
+
+
+  </body>
+  <div class="footer">
+    <footer id="footer_eden">WebForms &copy; 2018</footer>
+    <footer id="footer_dva">Created by students on FEIT-Skopje: Neceva M. / Velichkovski N. / Shushlevska M. / Senchuk I.</footer>
+  </div>
+</html>

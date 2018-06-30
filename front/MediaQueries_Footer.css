@@ -1,0 +1,144 @@
+input.error{
+   background-color: #f29dbf;
+}
+body{
+  overflow-y: hidden;
+}
+.footer {
+  background-color: rgba(0, 0, 0, 1);
+  color: rgb(185, 185, 146);
+  text-align: center;
+  font-size: 13.5px;
+  display: inline-block;
+  position: fixed;
+  /*width: 96%;*/
+  padding: 0.5%;
+  /*left: 17px;*/
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  /*top: 625px*/
+  bottom: 0;
+  border-top: 1px dashed white;
+  border-left: 1px dashed white;
+  border-right: 1.5px dashed white;
+  border-bottom: none;
+  outline: none;
+  /*border-radius: 3px;*/
+
+  width: 100%;
+  left: 0;
+  text-shadow: 0.2px 0.2px gray;
+  height: 20px;
+}
+
+#footer_eden {
+  margin-top: 0.5%;
+  margin-right: 1.5%;
+  font-weight: bold;
+}
+
+#footer_eden, #footer_dva {
+  display: inline-block;
+  position: relative;
+  font-weight: bold;
+  left: 20px;
+}
+
+.form-list {
+  height: 90.5%;
+}
+
+@media only screen and (max-width: 600px)
+{
+  html {
+    overflow-x: hidden;
+  }
+
+  .footer {
+    font-size: 10px;
+    left: 10px;
+  }
+
+  #footer_eden, #footer_dva {
+    left: 2px;
+  }
+
+  #forma_2 {
+    left: -188px;
+  }
+
+  #back_login
+  {
+    margin-right: 22.5%;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 767px)
+{
+  html {
+    overflow-x: hidden;
+  }
+
+
+  .footer {
+    font-size: 11px;
+    left: 12px;
+  }
+
+  #footer_eden, #footer_dva {
+    left: 4px;
+  }
+
+  #forma_2 {
+    left: -165px;
+  }
+
+  #back_login {
+    margin-right: 8.5%;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px)
+{
+  .footer {
+    font-size: 13px;
+    left: 17px;
+  }
+
+  #footer_eden, #footer_dva {
+    left: 3px;
+  }
+
+  #forma_2 {
+    height: 87%;
+    /*overflow-y: auto;*/
+  }
+
+  #create_button {
+    margin-top: -5%;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1260px)
+{
+  .footer {
+    font-size: 13.5px;
+    left: 17px;
+  }
+
+  #forma_2 {
+    height: 87%;
+    /*overflow-y: auto;*/
+  }
+
+  #img_2 {
+    visibility: hidden;
+  }
+}
+
+@media only screen and (min-width: 1260px) and (max-width: 1360px)
+{
+  .footer {
+    font-size: 13.5px;
+    left: 17px;
+  }
+}

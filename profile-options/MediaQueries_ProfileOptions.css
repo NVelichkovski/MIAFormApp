@@ -1,0 +1,234 @@
+@media only screen and (max-width: 600px)
+{
+  #view-0 {
+    width: 60%;
+    height: 50%;
+    margin-top: 20%;
+    margin-left: 20%;
+  }
+
+  #edit_button {
+    margin-left: 5%;
+    position: fixed;
+    width: 30%;
+    font-size: 14px;
+    padding: 0.8%;
+    margin-top: 4%;
+    margin-left: 10%;
+  }
+
+  #edit_button:active, #edit_button:hover {
+    padding: 0.87%;
+    font-size: 14.3px;
+  }
+
+  #view-1 {
+    width: 65%;
+    height: 70%;
+    padding: 10px;
+    margin-top: 6%;
+    margin-left: 18%;
+  }
+
+  #back_button, #save_button {
+    margin-top: 6%;
+    width: 48%;
+    font-size: 11px;
+    position: fixed;
+    padding: 1%;
+  }
+
+  #back_button {
+    margin-right: 0%;
+    margin-left: 2.1%;
+    bottom: 120px;
+  }
+
+  #save_button {
+    margin-left: 2.1%;
+    margin-top: 8%;
+  }
+
+  #back_button:active, #back_button:hover, #save_button:active, #save_button:hover {
+    padding: 1.2%;
+    font-size: 11.2px;
+  }
+
+}
+
+@media only screen and (min-width: 600px) and (max-width: 767px)
+{
+  #view-0 {
+    width: 60%;
+    height: 55%;
+    margin-top: 18%;
+    margin-left: 20%;
+  }
+
+  #edit_button {
+    margin-left: 5%;
+    position: fixed;
+    width: 30%;
+    font-size: 14px;
+    padding: 0.9%;
+    margin-top: 9%;
+    margin-left: 10%;
+  }
+
+  #edit_button:active, #edit_button:hover {
+    padding: 0.95%;
+    font-size: 14.3px;
+  }
+
+  #view-1 {
+    width: 65%;
+    height: 70%;
+    padding: 10px;
+    margin-top: 6%;
+    margin-left: 18%;
+  }
+
+  #back_button, #save_button {
+    margin-top: 6%;
+    width: 48%;
+    font-size: 11px;
+    position: fixed;
+    padding: 1%;
+  }
+
+  #back_button {
+    margin-right: 0%;
+    margin-left: 2.1%;
+    margin-top: 7%;
+    bottom: 105px;
+  }
+
+  #save_button {
+    margin-left: 2.1%;
+    margin-top: 8%;
+  }
+
+  #back_button:active, #back_button:hover, #save_button:active, #save_button:hover {
+    padding: 1.2%;
+    font-size: 11.2px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px)
+{
+  #view-0 {
+    width: 55%;
+    height: 55%;
+    margin-top: 13%;
+    margin-left: 20%;
+  }
+
+  #edit_button {
+    margin-left: 5%;
+    position: fixed;
+    width: 30%;
+    font-size: 15px;
+    padding: 0.9%;
+    margin-top: 5%;
+    margin-left: 7%;
+  }
+
+  #edit_button:active, #edit_button:hover {
+    padding: 0.95%;
+    font-size: 15.5px;
+  }
+
+  #view-1 {
+    width: 60%;
+    height: 70%;
+    padding: 10px;
+    margin-top: 6%;
+    margin-left: 18%;
+  }
+
+  #back_button, #save_button {
+    margin-top: 6%;
+    width: 20%;
+    font-size: 11px;
+    position: fixed;
+    padding: 1%;
+  }
+
+  #back_button {
+    margin-right: 0%;
+    margin-left: 2.1%;
+    margin-top: 10%;
+  }
+
+  #save_button {
+    margin-left: 25%;
+    margin-top: 10%;
+  }
+
+  #back_button:active, #back_button:hover, #save_button:active, #save_button:hover {
+    padding: 1.2%;
+    font-size: 11.2px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1260px)
+{
+  #view-0 {
+    width: 40%;
+    height: 55%;
+    margin-top: 10%;
+    margin-left: 30%;
+  }
+
+  #edit_button {
+    margin-left: 5%;
+    position: fixed;
+    width: 30%;
+    font-size: 15px;
+    padding: 0.9%;
+    margin-top: 3.5%;
+    margin-left: -0.8%;
+  }
+
+  #edit_button:active, #edit_button:hover {
+    padding: 0.95%;
+    font-size: 15.5px;
+  }
+
+  #view-1 {
+    width: 45%;
+    height: 70%;
+    padding: 10px;
+    margin-top: 4%;
+    margin-left: 28%;
+  }
+
+  #back_button, #save_button {
+    margin-top: 6%;
+    width: 15%;
+    font-size: 11px;
+    position: fixed;
+    padding: 1%;
+  }
+
+  #back_button {
+    margin-right: 0%;
+    margin-left: -0.5%;
+    margin-top: 7.5%;
+  }
+
+  #save_button {
+    margin-left: 17%;
+    margin-top: 7.5%;
+  }
+
+  #back_button:active, #back_button:hover, #save_button:active, #save_button:hover {
+    padding: 1.2%;
+    font-size: 11.2px;
+  }
+}
+
+@media only screen and (min-width: 1260px) and (max-width: 1360px)
+{
+
+}

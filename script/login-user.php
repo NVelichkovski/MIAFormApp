@@ -7,50 +7,49 @@ $_SESSION['state']=LOG_IN;
 
     unset($_SESSION['errors']);
 
-
-
-$username_email=strtoupper($_POST['username_email']);
-$password=$_POST['password'];
-$_SESSION['remember_me']=isset($_POST['remember_me']);
-
-function setRememberMeCookie($id)
-{
-    $token = uniqid($id);
-    updateRememberMeToken($id, $token);
-    setcookie("remember_me", $token, time()+1000*60*60*24*15);
-}
+$data=$_POST['data'];
+$username_email=strtoupper($data['username_email']);
+$password=$data['password'];
+$remember_me=$data['remember_me'];
 
 if (getRowByEmail($username_email)) {
         if (emailAndPasswordMatch($username_email,$password)) {
             $_SESSION['user_info']=getRowByEmail($username_email);
+            if ($remember_me && isset($_SESSION['user_info']['id'])){
+                $token=uniqid($_SESSION['user_info']['id']);
+                setcookie("remember_me", $token, time() +2592000, "/");
+                updateRememberMeToken((int)$_SESSION['user_info']['id'],(string)$token);
+            }
+            echo "false";
             closeConnection();
-            header("Location: cookie-script.php");
             exit();
         }
         else{
-            if (!isset($_SESSION['errors']))
-                $_SESSION['errors']= array();
-            array_push($_SESSION['errors'],INCORECT_PASSWORD);
+            closeConnection();
+            echo "password";
+            closeConnection();
+            exit();
         }
 }
 else if (getRowByUsername($username_email)) {
         if (usernameAndPasswordMatch($username_email,$password)) {
             $_SESSION['user_info']=getRowByUsername($username_email);
+            if ($remember_me){
+                $token=uniqid($_SESSION['user_info']['id']&& isset($_SESSION['user_info']['id']));
+                setcookie("remember_me", $token, time() +2592000, "/");
+                updateRememberMeToken((int)$_SESSION['user_info']['id'], (string)$token);
+            }
+            echo "false";
             closeConnection();
-            header("Location: cookie-script.php");
             exit();
-        }else
-        {
-            if (!isset($_SESSION['errors']))
-                $_SESSION['errors']= array();
-            array_push($_SESSION['errors'],INCORECT_PASSWORD);
+        }else{
+
+            echo "password";
+            closeConnection();
+            exit();
         }
 } else{
-    if (!isset($_SESSION['errors']))
-        $_SESSION['errors']= array();
-    array_push($_SESSION['errors'],USERNAME_EMAIL_NOT_FOUND);
+    closeConnection();
+    echo "username_email";
+    exit();
 }
-
-closeConnection();
-header("Location: ../front/LogIn_AND_SignUp.html.php");
-exit();
