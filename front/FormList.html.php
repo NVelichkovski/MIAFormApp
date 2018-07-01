@@ -53,7 +53,7 @@
                     ";
                 }
             }else{
-                echo '<div class="single-form" onclick="">There is no forms yet</div>';
+                echo '<div class="single-form" ><strong>There is no forms yet</strong></div>';
             }
             ?>
         </div>

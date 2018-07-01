@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="MediaQueries_ProfileOptions.css">
     <script src="./ProfileOptionsNew.js"></script>
     <script src="nikola_skripti.js"></script>
+
 </head>
 <body>
 <div class="container">
@@ -95,12 +96,12 @@
 
                 <div class="form-item">
                     <label>Username</label>
-                    <input type="text" id="username_input"/>
+                    <input type="text" id="username_input" />
                 </div>
 
                 <div class="form-item">
                     <label>Email</label>
-                    <input type="email" id="email_input"/>
+                    <input type="email" id="email_input" />
                 </div>
 
                 <div class="form-item" id="chanege_pass_div">

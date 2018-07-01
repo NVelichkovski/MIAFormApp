@@ -1,3 +1,10 @@
+var newName;
+var newUsername;
+var newEmail;
+
+var name;
+var username;
+var email;
 function validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -8,9 +15,9 @@ $(document).ready(function() {
     $("#username_input").val($("#username").html());
     $("#email_input").val($("#email").html())
 
-    let name=$("#name").html();
-    let username=$("#username").html().toUpperCase();
-    let email=$("#email").html().toUpperCase();
+    name=$("#name").html();
+    username=$("#username").html().toUpperCase();
+    email=$("#email").html().toUpperCase();
 
   $('#edit_button').on('click', function(){
     $('#view-1').css('display', 'block');
@@ -38,8 +45,25 @@ $(document).ready(function() {
   });
 
   $('#continue').click(function() {
-      $('.reset').css('display', 'none');
-      $('.reset_next').css('display', 'inline-block');
+      let password=$("#current_pass").val();
+      $.ajax({
+          url: "../script/profile-options/check-password.php",
+          method: "POST",
+          data: {password: password},
+          success: (data) => {
+              // alert(data);
+              if (data==="false")
+              {
+                  toastr.error("Invalid password");
+                  return;
+              }
+              else if(data==="true"){
+                  $('.reset').css('display', 'none');
+                  $('.reset_next').css('display', 'inline-block');
+              }
+          }
+
+      })
   });
 
   $('#cancel').on('click', function(){
@@ -62,8 +86,16 @@ $(document).ready(function() {
     $('.strelka').css('opacity', '0');
   });
 
+  $('#email_input').change(()=>{
+      newEmail=$("#email_input").val().toUpperCase();
+      if(!validateEmail(newEmail))
+      {
+          toastr.error("The email is not in a valid format, please insert valid e-mail address", "Invalid e-mail");
+          return;
+      }
+  })
   $('#save_button').on('click', function(){
-      newName=$("#name_input").val().toUpperCase();
+      newName=$("#name_input").val();
       newUsername=$("#username_input").val().toUpperCase();
       newEmail=$("#email_input").val().toUpperCase();
 
@@ -72,7 +104,7 @@ $(document).ready(function() {
          toastr.error("The email is not in a valid format, please insert valid e-mail address", "Invalid e-mail");
          return;
       }
-      alert(newEmail+" "+newUsername+" "+newName);
+      alert("email->"+newEmail+" username->"+newUsername+" name->"+newName);
       if (!(newName===name)){
         $.ajax({
             url: '../script/profile-options/change-name.php',
@@ -106,7 +138,57 @@ $(document).ready(function() {
   });
 
   $('#reset_button').on('click', function(){
-
+      password=$("#new_pass").val();
+    $.ajax({
+        url: "../script/profile-options/change-password.php",
+        method: "POST",
+        data: {password: password},
+        success: (data)=>{
+            location.reload();
+        }
+    })
   });
 
+
 });
+
+function checkIsUsernameUnique(){
+    username=username.toUpperCase();
+    if (newUsername==="" || newUsername===username  )
+        return;
+    $.ajax({
+        url: '../script/signup/email-check.php',
+        method: "POST",
+        data: {username : username},
+        success: (data)=>{
+            if (data){
+                toastr.success("The Username is unique");
+            }else {
+                toastr.error("There is already account with this Username", "Please try again")
+            }
+        }
+    })
+}
+
+function checkIsEmailUnique() {
+    if (newEmail==="" || newEmail===email)
+        return;
+    $.ajax({
+        url: '../script/signup/email-check.php',
+        method: "POST",
+        data: {email : email},
+        success: (data)=>{
+            if (data){
+                if ($("#email_field_2").hasClass('error')){
+                    $("#email_field_2").removeClass('error');
+                }
+                toastr.success("The email is unique");
+            }else {
+                if (!$("#email_field_2").hasClass('error'))
+                    $("#email_field_2").addClass('error');
+                toastr.error("There is already account with this email", "Please try again")
+            }
+        }
+    })
+}
+

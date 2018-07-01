@@ -34,7 +34,7 @@
         $identifier='element_'.$_SESSION['user_info']['id'].'_'.$indexForm.'_'.$indexElement;
         return '<div class="form-element">
                     <legend for="'.$identifier.'_2">'.$label.'</legend>
-                    <textarea name="'.$identifier.'_2" id="'.$identifier.'" cols="30" rows="10">Zdravo</textarea>
+                    <textarea name="'.$identifier.'_2" id="'.$identifier.'_2" cols="30" rows="10"></textarea>
                 </div>';
     }
 
@@ -70,7 +70,7 @@
             }
             $returnString.='
                 <li>
-                    <input class="checkbox" type="checkbox" name="'.$identifier."_4/".$key.'" value="'.str_replace(" ","_",$value).'" id="'.$identifier."/".$key.'">
+                    <input class="checkbox" type="checkbox" name="'.$identifier."_4_".$key.'" value="'.str_replace(" ","_",$value).'" id="'.$identifier."_".$key.'_4">
                     <label for="'.$identifier."_".$key.'_4">'.$label.'</label>
                 </li>';
         }
@@ -78,31 +78,31 @@
         return $returnString;
     }
 
-//    $formArray = array(
-//        'title' => 'Form-Title',
-//        'elements'=> array(
-//            array(TEXT_FIELD, 'text field label'),
-//            array(TEXT_AREA, 'text area label'),
-//            array(
-//                RADIO_BUTTON,
-//                'Radio button label',
-//                '1 radio button label',
-//                '2 radio button label',
-//                '3 radio button label'
-//            ),
-//            array(
-//                CHECK_BOX,
-//                'Check box label',
-//                '1 combo box label',
-//                '2 combo box label',
-//                '3 combo box label'
-//            ),
-//            array(DATE_FIELD, "date field label"),
-//            array(EMAIL_FIELD, "email field label")
-//            )
-//        );
+    $formArray = array(
+        'title' => 'Form-Title',
+        'elements'=> array(
+            array(TEXT_FIELD, 'text field label'),
+            array(TEXT_AREA, 'text area label'),
+            array(
+                RADIO_BUTTON,
+                'Radio button label',
+                '1 radio button label',
+                '2 radio button label',
+                '3 radio button label'
+            ),
+            array(
+                CHECK_BOX,
+                'Check box label',
+                '1 combo box label',
+                '2 combo box label',
+                '3 combo box label'
+            ),
+            array(DATE_FIELD, "date field label"),
+            array(EMAIL_FIELD, "email field label")
+            )
+        );
 
-        $formArray=json_decode($_POST['form-array']);
+//        $formArray=json_decode($_POST['form-array']);
         if (!isset($formArray))
         {
             $_SESSION['error']="Form array is not set";
@@ -124,9 +124,17 @@
 //        echo mysqli_error($conn);
 //        die("ERROR with creating form");
 //        echo "<br> Create form table result<br>";
+        $formHash=getFormHashById($_SESSION['user_info']['id'],$formId);
         var_dump($queryRez); echo "<br>";
-        $arrayJSON=$_POST['form-array'];
+        $arrayJSON=json_encode($formArray);
+//        $arrayJSON=$_POST['form-array'];
         $formString='
+    <?php 
+        session_start();
+        $_SESSION[\'form\']=\''.$formId. '\';
+        $_SESSION[\'user\']=\''.$_SESSION['user_info']['id']. '\';
+        
+    ?>
         <!DOCTYPE html>
     <html>
         <head>
@@ -141,7 +149,7 @@
         </script>
         </head>
     <body>
-    <form action="save-info.php" method="post">
+    <form action="../../../script/save-info.php" method="post">
     <fieldset>
     <legend>'.$formArray['title'].'</legend>
     ';
@@ -167,7 +175,7 @@
                 break;
         }
     }
-    $formHash=getFormHashById($_SESSION['user_info']['id'],$formId);
+
     $formString.='
     <br>
     <button type="submit">Submit</button>
@@ -177,7 +185,7 @@
     </html> ';
    
     mkdir("../users/".$_SESSION['user_info']['hash_id']."/".$formHash, 0755, true);
-    $file = fopen("../users/".$_SESSION['user_info']['hash_id']."/".$formHash."/index.html.php.php", "w") or die("Unable to create the form!");
+    $file = fopen("../users/".$_SESSION['user_info']['hash_id']."/".$formHash."/index.php", "w") or die("Unable to create the form!");
     fwrite($file, $formString);
     fclose($file);
     $file=fopen("../users/".$_SESSION['user_info']['hash_id']."/".$formHash."/form.json", "w") or die("Unable to create the form");

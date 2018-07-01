@@ -1,5 +1,5 @@
 function goToForm(formHashId) {
-    location.replace('http://localhost/miaformapp/profile-options/profileoptions.html.php?hash='+formHashId);
+    location.replace('http://localhost/miaformapp/showresults/showresults.html.php?formHash='+formHashId);
 }
 function logOut(){
     $.ajax({
@@ -11,3 +11,4 @@ function logOut(){
     });
     location.replace('./login_and_signup.html.php')
 }
+

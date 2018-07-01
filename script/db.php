@@ -167,7 +167,7 @@ function updatePassword($id, $password){
     $hash=password_hash($password, PASSWORD_BCRYPT);
     $updatePasswordHashStmt=$GLOBALS['conn']->prepare("UPDATE users SET password=? WHERE id=?");
     $updatePasswordHashStmt->bind_param("ss", $hash, $id);
-    $updatePasswordHashStmt->exicute();
+    $updatePasswordHashStmt->execute();
     if (mysqli_error($GLOBALS['conn'])) {
         $return = mysqli_error($GLOBALS['conn']);
     } else
@@ -194,7 +194,7 @@ function updateName($id, $name){
 
 function updateEmail($id, $email){
     $email=strtoupper($email);
-    $updateEmailStmt=$GLOBALS['conn']->prepare("UPDATE users SET name=? WHERE id=?");
+    $updateEmailStmt=$GLOBALS['conn']->prepare("UPDATE users SET email=? WHERE id=?");
     $updateEmailStmt->bind_param("ss", $email, $id);
     $updateEmailStmt->execute();
     if (mysqli_error($GLOBALS['conn'])) {
@@ -276,13 +276,14 @@ function createFormTable($userId, $formId, $elementArray)
                     continue;
                 }
                 $sql.=" element_{$userId}_{$formId}_{$key}_{$key2}_4 VARCHAR(50),";
+
             }
              break;
          case EMAIL_FIELD:
             $sql.=" element_{$userId}_{$formId}_{$key}_5 VARCHAR(100),";
              break;
          case DATE_FIELD:
-            $sql.=" element_{$userId}_{$formId}_{$key}_5 VARCHAR(10),";
+            $sql.=" element_{$userId}_{$formId}_{$key}_6 VARCHAR(10),";
             break;
      }
  }
@@ -338,4 +339,10 @@ function deleteFormFromUserList($userId, $formId){
     mysqli_query($GLOBALS['conn'],$sql);
     $sql="DELETE FROM `form_table_{$userId}` WHERE `form_table_{$userId}`.`id` = {$formId};";
     mysqli_query($GLOBALS['conn'],$sql);
+}
+
+function getFormTableContent($userId, $formId){
+    $sql="SELECT * FROM `form_table_{$userId}_{$formId}`";
+    $qry=mysqli_query($GLOBALS['conn'],$sql);
+    return $qry;
 }
