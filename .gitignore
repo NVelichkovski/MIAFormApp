@@ -2,11 +2,11 @@
 <<<<<<< HEAD
 .idea/
 .vscode/
-plan.txt
+*.txt
 =======
-.rar
+*.rar
 /.idea
 /.vscode
 >>>>>>> 02d7445838975pl791cdf012f45cb4da4e5342025a
 remove-form/
-plan.txt
+*.txt
