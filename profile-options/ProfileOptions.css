@@ -62,7 +62,7 @@ form .form-button button{
 #view-0 {
   /*min-height: 60%;*/
   width: 30%;
-  height: 50%;
+  height: 45%;
   border-radius: 3%;
   box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.5);
   margin: auto;
@@ -74,8 +74,7 @@ form .form-button button{
 
 #view-1 {
   display: none;
-  width: 30%;
-  height: 65%;
+  width: 32%;
   border-radius: 3%;
   box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.5);
   margin: auto;
@@ -83,6 +82,7 @@ form .form-button button{
   margin-top: 4%;
   background-color: rgba(255,255,255,0.8);
   margin-left: 33%;
+    height: 50%;
 }
 
 .header {
@@ -92,7 +92,23 @@ form .form-button button{
     background-color: white;/*rgba(153, 0, 0, 0.8);*/
 }
 
-#edit_button {
+#button_div{
+    border-radius: 12px;
+    border: none;
+    width: 15%;
+    padding: 0.5%;
+    background-color: rgba(179,0,0,0.8);
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight:bold;
+    letter-spacing: 2.5px;
+    color: white;
+    outline: none;
+    margin-top: 1%;
+    margin-left: 1.5%;
+    position: fixed;
+}
+#edit_button, #form_list_button {
   border-radius: 12px;
   border: none;
   width: 15%;
@@ -104,12 +120,12 @@ form .form-button button{
   letter-spacing: 2.5px;
   color: white;
   outline: none;
-  margin-top: 1%;
+    margin-top: 35px;
   margin-left: 1.5%;
   position: fixed;
 }
 
-#edit_button:active, #edit_button:hover {
+#edit_button:active, #edit_button:hover, #form_list_button:active, #form_list_button:hover{
   padding: 0.6%;
   font-size: 17px;
   background-color: rgba(179,0,0,0.9);
@@ -209,11 +225,13 @@ form .form-button button{
 }
 
 #back_button {
+    margin-top: 40px;
   margin-right: 15%;
   margin-left: -2.5%;
 }
 
 #save_button {
+    margin-top: 40px;
   margin-left: 9.3%;
 }
 

@@ -4,15 +4,100 @@ $(document).ready(function() {
   var kolku=0;
   var reden_broj=0;
   var elementi=new Array();
-  var formAray=new Array();
-  formAray['title']=
   var m=0;
   var p=0;
   var brojac=0;
+  var elements=new Array();
+  var array;
+  var radio_array=new Array();
+  var check_array=new Array();
+  var broj_radio;
+  var broj_check;
+  var brojac_radio;
+  var brojac_check;
   $add_div1=$('<div></div>');
   $add_div2=$('<div></div>');
+
   $('select').on('change', function() {
     izbor=$("select :selected").text();
+  });
+
+  $('#kolku_radio').on('keydown', function(){
+    $broj_radio=$('#kolku_radio').val();
+    brojac_radio=$broj_radio;
+  });
+
+  $(document.body).on('change', '.ime_radio', function(){
+    if(brojac_radio>0)
+    {
+      radio_array.push($(this).val());
+      brojac_radio--;
+    }
+  });
+
+  $('#kolku_check').on('keydown', function(){
+    $broj_check=$('#kolku_check').val();
+    brojac_check=$broj_check;
+  });
+
+  $(document.body).on('change', '.ime_check', function(){
+    if(brojac_check>0)
+    {
+      check_array.push($(this).val());
+      brojac_check--;
+    }
+  });
+
+  $(document.body).on('change', '.label', function(){
+    var element_array=new Array();
+    var content=$(this).val();
+
+    if(izbor=="Text field")
+    {
+      element_array.push(1);
+      element_array.push(content);
+      elements.push(element_array);
+    }
+    else if(izbor=="Textarea")
+    {
+      element_array.push(2);
+      element_array.push(content);
+      elements.push(element_array);
+    }
+    else if(izbor=="Radio button group")
+    {
+      element_array.push(3);
+      element_array.push(content);
+      for(var i=0;i<radio_array.length;i++)
+      {
+        element_array.push(radio_array[i]);
+      }
+      elements.push(element_array);
+      radio_array=new Array();
+    }
+    else if(izbor=="Checkbox group")
+    {
+      element_array.push(4);
+      element_array.push(content);
+      for(var j=0;j<check_array.length;j++)
+      {
+        element_array.push(check_array[j]);
+      }
+      elements.push(element_array);
+      check_array=new Array();
+    }
+    else if(izbor=="E-mail")
+    {
+      element_array.push(5);
+      element_array.push(content);
+      elements.push(element_array);
+    }
+    else if(izbor=="Date")
+    {
+      element_array.push(6);
+      element_array.push(content);
+      elements.push(element_array);
+    }
   });
 
   $("button").on('click', function() {
@@ -58,7 +143,7 @@ $(document).ready(function() {
       $slika.addClass('sl_data');
       $slika.attr('id',reden_broj);
 
-      $appendElement=$('<input type="text" placeholder="Date:" size="15">');
+      $appendElement=$('<input type="text" placeholder="Label caption:" size="15">');
       $appendElement.addClass('label');
       $appendElement1=$('<input type="date" placeholder="mm/dd/yyyy"><br>');
       $appendElement1.addClass('text_field');
@@ -123,7 +208,7 @@ $(document).ready(function() {
       $slika.attr('class', 'sl_mail');
       $slika.attr('id',reden_broj);
 
-      $appendElement=$('<input type="text" placeholder="Email:" size="15">');
+      $appendElement=$('<input type="text" placeholder="Label caption:" size="15">');
       $appendElement1=$('<input type="email" name="mail" placeholder="" size="30"><br>');
       $appendElement.addClass('label');
       $appendElement1.addClass('text_field');
@@ -179,11 +264,95 @@ $('#clear_button').on('click', function(){
 });
 
 $('#cancel_button').on('click', function(){
-  window.location="FormList.html";
+  window.location.replace("http://localhost:63342/MIAFormApp/front/formlist.html.php");
 });
 
 $('#save_button').click(function() {
-  //SAVE VO BAZA KOD
+  if(elements.length==0)
+  {
+    var i=0;
+    var br=elementi.length;
+    var element_array=new Array();
+    while(i<br)
+    {
+      var el=elementi[i];
+      if(el=="t")
+      {
+          element_array.push(1);
+          element_array.push("Label caption");
+          elements.push(element_array);
+          element_array=new Array();
+      }
+      else if(el=="ta")
+      {
+        element_array.push(2);
+        element_array.push("Label caption");
+        elements.push(element_array);
+        element_array=new Array();
+      }
+      else if(el=="r")
+      {
+        element_array.push(3);
+        element_array.push("Label caption");
+        for(var i=0;i<radio_array.length;i++)
+        {
+          element_array.push(radio_array[i]);
+        }
+        elements.push(element_array);
+        element_array=new Array();
+        radio_array=new Array();
+      }
+      else if(el=="c")
+      {
+        element_array.push(4);
+        element_array.push("Label caption");
+        for(var j=0;j<check_array.length;j++)
+        {
+          element_array.push(check_array[j]);
+        }
+        elements.push(element_array);
+        element_array=new Array();
+        check_array=new Array();
+      }
+      else if(izbor=="E-mail")
+      {
+        element_array.push(5);
+        element_array.push("Label caption");
+        elements.push(element_array);
+        element_array=new Array();
+      }
+      else if(izbor=="Date")
+      {
+        element_array.push(6);
+        element_array.push("Label caption");
+        elements.push(element_array);
+        element_array=new Array();
+      }
+      i++;
+    }
+  }
+  if($('#naslov').val()=="")
+  {
+    array={'title':"Title", 'elements':elements};
+  }
+  else {
+    array={'title':$('#naslov').val(), 'elements':elements};
+  }
+
+    $.ajax({
+        url: "../script/create-form.php",
+        method: "POST",
+        data: {form_array: JSON.stringify(array) },
+        success: (data)=>{
+          // alert(data)
+          location.replace("../front/formlist.html.php");},
+        error: ()=>{alert("ERROR");}
+    })
+
+  //DOPOLNUVANJE NIKOLA
+
+  //NA KRAJ SE VRAKJA NA SVOJATA HOMEPAGE
+  //window.location="FormList.html";
 });
 
 $('#done_button').on('click', function(){
@@ -233,6 +402,7 @@ $(document.body).on('click', 'img', function(){
       indeks=elementi.indexOf(el);
       if (indeks > -1) {
         elementi.splice(indeks, 1);
+        elements.splice(indeks, 1);
       }
       $('img:eq('+(br-1)+')').css('display', 'none');
       if(elementi.length==0)

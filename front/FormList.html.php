@@ -2,7 +2,7 @@
     session_start();
     require_once "../script/db.php";
     if (!isset($_SESSION['user_info'])) {
-        header("Location: ./login_and_signup.html.php");
+        header("Location: http://localhost:63342/MIAFormApp/front/login_and_signup.html.php");
     }
 ?>
 <!DOCTYPE html>
@@ -30,10 +30,10 @@
         <div class="user-info">
 
             <span id="user_menu"> <?php echo $_SESSION['user_info']['name']?> </span>
-            <div id="button_div" onmouseover="Prikazi()" onmouseout="Out()"> <button type="button" name="new" id="create_new" onmouseover="Prikazi()" onmouseout="Out()">Create new +</button> </div>
+            <div id="button_div" onmouseover="Prikazi()" onmouseout="Out()"> <button type="button" name="new" id="create_new" onmouseover="Prikazi()" onmouseout="Out()" onclick="goToCreateForm()">Create new +</button> </div>
 
             <div class="settings-menu">
-                <div onclick="window.location.replace('../profile-options/profileoptions.html.php')" class="settings-menu-item">Profile options</div>
+                <div onclick="window.location.replace('http://localhost:63342/MIAFormApp/profile-options/profileoptions.html.php')" class="settings-menu-item">Profile options</div>
                 <div onclick="logOut()" class="settings-menu-item">Log out</div>
             </div>
         </div>
@@ -44,7 +44,6 @@
 
         <div class="form-list">
             <?php
-
             $sqlRez=getUsersForms($_SESSION['user_info']['id']);
             if(mysqli_num_rows($sqlRez)>0){
                 while ($row=mysqli_fetch_assoc($sqlRez)){
@@ -59,11 +58,10 @@
         </div>
 
     </div>
-    <?php var_dump($_SESSION); var_dump($_COOKIE)?>
 </div>
 
 <div class="footer">
-    <footer id="footer_eden">WebForms &copy; 2018</footer>
+    <footer id="footer_eden" onclick="goToForm()">WebForms &copy; 2018</footer>
     <footer id="footer_dva">Created by students on FEIT-Skopje: Neceva M. / Velichkovski N. / Shushlevska M. / Senchuk I.</footer>
 </div>
 

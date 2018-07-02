@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="ForgotPasswordCSS.css">
     <link rel="stylesheet" href="MediaQueries_ForgotPass.css">
     <link rel="stylesheet" href="MediaQueries_ProfileOptions.css">
+
+    <script src="./back_homepage.js"></script>
     <script src="./ProfileOptionsNew.js"></script>
     <script src="nikola_skripti.js"></script>
 
@@ -32,9 +34,10 @@
 
             <span><?php echo $_SESSION['user_info']['name']?></span>
 
+
             <div class="settings-menu">
-                <a class="settings-menu-item" href="ProfileOptions.html.php">Profile options</a>
-                <div class="settings-menu-item" onclick="logOut()">Log out</div>
+                <div class="settings-menu-item">Profile options</div>
+                <div class="settings-menu-item" onclick="logOut()"  >Log out</div>
             </div>
         </div>
 
@@ -70,7 +73,12 @@
 
                 <div class="form-button" style="padding-bottom: 30px;">
                     <button
-                            type="button" id="edit_button">Edit settings</button>
+                            type="button" class="form_button" id="edit_button">Edit settings</button>
+                </div>
+
+                <div class="form-button" style="padding-bottom: 30px;">
+                    <button
+                          onclick="backHomepage()"   type="button" class="form_button" id="form_list_button" style="position:fixed; bottom: 40%" >Back</button>
                 </div>
 
 

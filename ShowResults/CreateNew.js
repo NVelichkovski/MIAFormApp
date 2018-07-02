@@ -1,4 +1,4 @@
-function createNew()
+function goBack()
 {
   window.location="FormGenerator.html";
 }

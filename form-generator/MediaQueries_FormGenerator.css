@@ -7,10 +7,10 @@
   .footer {
     font-size: 10px;
     margin-top: 2.55%;
-    /*bottom: 0px;*/
+    bottom: 0px;
     margin-left: 0%;
     left: 10px;
-    top: 50px;
+    top: 600px;
     margin-bottom: 0;
     position: fixed;
     height: 4%;
@@ -282,6 +282,7 @@
     bottom: 0px;
     margin-left: 0%;
     left: 10px;
+    top: 590px;
     margin-bottom: 0;
     position: fixed;
     height: 4%;

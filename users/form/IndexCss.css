@@ -1,0 +1,233 @@
+html, body {
+  height: 100%;
+  width: auto;
+}
+
+html {
+  overflow: hidden;
+  overflow-x: hidden;
+}
+body {
+  background-image: url('part_one.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+legend {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+fieldset {
+  overflow-y: auto;
+  height: 90%;
+  width: 60%;
+  background-color: rgba(237, 237, 222, 0.7);/*rgba(255,255,255,0.8);*/
+  border-radius: 10px;
+  border: 2px solid;
+  border-color: rgba(0, 0, 0, 0.3);
+  outline: none;
+  padding: 1%;
+  margin-left: 21%;
+  margin-top: 0%;
+  position: fixed;
+  margin-bottom: 2%;
+}
+
+form {
+  height: 90%;
+}
+
+.text-field, .date-field, .email-field {
+  border-radius: 10px;
+  padding: 1%;
+  width: 35%;
+  /*background-color: rgba(0,0,0,0.7);*/
+  background-color: rgba(0,0,0,0.3);
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing:2.3px;
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  color: white;
+  white-space: nowrap;
+  margin-bottom: 1.5%;
+  display: inline-block;
+  margin-left: 25%;
+  top: -40px;
+  position: relative;
+  margin-top: 0.3%;
+}
+
+.date-field {
+  width: 21%;
+}
+
+.text-field:focus, .date-filed:focus, .email-field:focus {
+    background-color: rgba(237, 237, 222, 0.9);
+    box-shadow: 4px 5px 3px rgba(77, 77, 51,0.6);
+    letter-spacing: 2.3px;
+    border: solid 1px rgba(0,0,0,0.7);
+    color: rgba(230, 0, 0, 0.7);
+  }
+
+  legend[for] {
+    margin-top: 0%;
+    margin-bottom: 1.5%;
+    width: auto;
+    right: 0;
+    outline: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    background-color: rgba(0,0,0,0);
+    color: rgba(230, 0, 0, 0.9);
+    white-space: nowrap;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  }
+
+  label[for] {
+    margin-top: 0%;
+    margin-bottom: 1.5%;
+    width: auto;
+    right: 0;
+    outline: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    background-color: rgba(0,0,0,0);
+    color: rgb(128, 0, 0);
+    white-space: nowrap;
+    font-weight: bold;
+    font-size: 16.5px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  }
+
+  li {
+    top: -40px;
+    margin-left: 20%;
+    display: block;
+    position: relative;
+    word-wrap: none;
+  }
+
+  .form-element {
+    flex-direction: column;
+  }
+
+  textarea {
+    background-color: gray;
+    display: inline;
+    position: relative;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    resize: both;
+    border-radius: 7px;
+    padding: 1%;
+    background-color: rgba(0,0,0,0.3);
+    font-size: 15px;
+    font-weight: bold;
+    outline: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    color: white;
+    margin-left: 25%;
+    top: -30px;
+    margin-bottom: 3%;
+    margin-top:0;
+  }
+
+  textarea:focus {
+      box-shadow: 4px 5px 3px rgba(77, 77, 51,0.6);
+      background-color: rgba(237, 237, 222, 0.6);
+      border: solid 1px rgba(0,0,0,0.7);
+      color: rgba(230, 0, 0, 0.7);
+    }
+
+
+  button {
+    border-radius: 12px;
+    border: none;
+    width: 30%;
+    padding: 1.5%;
+    background-color: rgba(179,0,0,0.8);
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight:bold;
+    letter-spacing: 2.5px;
+    color: white;
+    margin-top: 0;
+    outline: none;
+    display: inline;
+    position: relative;
+    margin-right: 3%;
+    margin-bottom: 3%;
+    margin-left: 35%;
+  }
+
+  button:hover, button:active{
+      background-color: rgba(179,0,0,0.9);
+      font-size: 18.5px;
+  }
+
+  #title{
+    font-size: 25px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-weight: bold;
+    color: rgb(128, 0, 0);
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  .scrollbar
+{
+	margin-left: 30px;
+	float: left;
+	height: 300px;
+	width: 65px;
+	background: #F5F5F5;
+	overflow-y: scroll;
+	margin-bottom: 25px;
+}
+
+.force-overflow
+{
+	min-height: 450px;
+}
+
+#wrapper
+{
+	text-align: center;
+	width: 500px;
+	margin: auto;
+}
+
+#style-2::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #D62929;
+}

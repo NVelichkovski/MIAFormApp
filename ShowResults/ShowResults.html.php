@@ -31,34 +31,34 @@
 
 
     <script>
-        var formInfoJson=<?php
+        var formInfoJson= <?php
                 $formJsos=json_encode($formArray);
-            echo '\''.$formJsos.'\''
+            echo '\''.$formJsos.'\';'
             ?>;
         var formInfoArray=JSON.parse(formInfoJson);
         var formArray;
-        console.log(formArray);
-        $.ajax({
+            $.ajax({
             url: "../users/<?php echo $_SESSION['user_info']['hash_id']."/".$_GET['formHash']?>/form.json",
-            success: (data)=>{
-                alert(data);
-                formArray=data;
-                console.log(formArray);
-            }
-        })
-        alert(formArray);
-    </script>
+            success: (data) =>{
+
+                    formArray=JSON.parse(JSON.stringify(data));
+
+
+
+                setting();
+                }
+            })
+           </script>
 </head>
 <body>
-<?php var_dump($formArray); ?>
     <div class="container">
 
         <div class="header">
 
             <div class="user-info">
 
-                <span id="user_menu"> User name </span>
-                <div id="button_div" onclick="createNew()" onmouseover="Prikazi()" onmouseout="Out()"> <button type="button" name="new" id="create_new" onclick="createNew()" onmouseover="Prikazi()" onmouseout="Out()" style="padding-top: 20%">
+                <span id="user_menu"> <?php echo $_SESSION['user_info']['name']?> </span>
+                <div id="button_div" onclick="location.replace('http://localhost:63342/MIAFormApp/front/formlist.html.php')" onmouseover="Prikazi()" onmouseout="Out()"> <button type="button" name="new" id="create_new" onclick="location.replace('http://localhost:63342/MIAFormApp/front/formlist.html.php')" onmouseover="Prikazi()" onmouseout="Out()" style="padding-top: 20%">
                     Back
                 </button>
                 </div>
@@ -72,23 +72,32 @@
         </div>
 
         <div class="content">
-
-            <div style="width: 100%">
-                <span id="title-container" >
-                    <center>Form name</center>
-                </span>
-            </div>
-
-            <div class="info-container-left">
+            <div id="table-container" class="info-container">
                 <table id="table_id">
 
                 </table>
             </div>
+            <div id="graph-container" class="info-container">
 
-            <div class="info-container-right">
-                <canvas id="element1"></canvas>
             </div>
-      
+
+            <fieldset ">
+            <label for="link_input">Share:</label>
+            <input id="link_input" disabled value="http://localhost:63342/MIAFormApp/script/form.php?user=<?php echo $_SESSION['user_info']['hash_id']?>&form=<?php echo $formHash?>" >
+            </fieldset>
+            <!---->
+<!---->
+<!--            <table>-->
+<!--                <div class="info-container">-->
+<!--                    <table id="table_id">-->
+<!---->
+<!--                    </table>-->
+<!--                </div>-->
+<!--                <div class="info-container">-->
+<!--                    sd-->
+<!--                </div>-->
+
+
         </div>
 
         <div class="footer">
@@ -98,61 +107,122 @@
      </div>
 
     <script>
-        var str="<tr>";
-        formArray['elements'].forEach((element)=>{
-            if (element[0]===1)
-                str=str+"<th>"+element[1]+"</th>";
-            if (element[0]===2)
-                str=str+"<th>"+element[1]+"</th>";
-            if (element[0]===3)
-            {
-                return;
-            }
-            if (element[0]===4)
-                str=str+"<th>"+element[1]+"</th>";
-            if (element[0]===5)
-                str=str+"<th>"+element[1]+"</th>";
-            if (element[0]===6)
-                str=str+"<th>"+element[1]+"</th>";
+        function setting() {
 
-        })
-        str=str+"</tr>"
-        
-        var currCheckboxId=-1;
-        formInfoArray.forEach((element)=>{
-            
-            str=str+"<tr>";
-            for (var key in element)
-            {
-               let keyArray=key.split("_");
+            console.log("formArray->"+JSON.stringify(formArray));
+            console.log("formInfoArray->"+JSON.stringify(formInfoArray));
+            var str="<tr>";
+            for (var element in formArray.elements) {
 
-                if (keyArray.length==6){
-                    if (currCheckboxId==-1)
-                    {
-                        currCheckboxId=keyArray[3];
-                        str=str+"<td><li>"+element[key]+"</li>";
-                    }
-                    else {
-                        if (keyArray[3]==currCheckboxId){
-                            str=str+"<li>"+element[key]+"</li>";
-                        }
-                        else {
-                            currCheckboxId=keyArray[3];
-                            str=str+"</td><td><li>"+element[key]+"</li>";
-                        }
-                    }
-                }
-                if (currCheckboxId!=-1){
-                    str=str+"</td>"
-                    currCheckboxId=-1;
-                }
-                if (keyArray[3]=="3")
-                    continue;
-                str=str+"<td>"+element[key]+"</td>";
+                str=str+"<th>"+formArray.elements[element][1]+"</th>";
             }
             str=str+"</tr>";
-        })
-        $("#table_id").html(str);
+
+            for (var element of formInfoArray){
+
+                str=str+"<tr>";
+                currElementId=-1;
+                for (var key in element)
+                {
+                    // alert(key);
+                    keyArray=key.split("_");
+                    if (currElementId==keyArray[3])
+                    {
+                        if (element[key]==null)
+                            continue;
+                        str=str.slice(0,-5);
+                        str=str+"<br>"+element[key]+"</td>";
+                        continue;
+                    }
+
+                    str=str+"<td>";
+                    if(keyArray[3]==4)
+                        str=str+"Selected values: <br>";
+                    str=str+element[key]+"</td>";
+                    currElementId=keyArray[3];
+                }
+                str=str+"</tr>";
+            }
+            $("#table_id").html(str);
+
+
+            let radioArray=[];
+            for (var info of formInfoArray){
+                for (var key in info){
+                    keyArray=key.split("_");
+                    if (keyArray[keyArray.length-1]==3){
+                        if (!(key in radioArray)){
+
+                            radioArray[key]=[];
+
+                        }
+                        if (!(info[key] in radioArray[key])){
+
+                            radioArray[key][info[key]]=0;
+
+                        }
+
+                        radioArray[key][info[key]]++;
+
+                    }
+                }
+            }
+
+            str="";
+            for (var key in radioArray){
+                keyArray=key.split("_");
+                str=str+"<canvas id='element"+keyArray[3]+"'></canvas>";
+            }
+            $("#graph-container").html(str);
+
+
+            let htmlElementsArray=[];
+            let chartArray=[];
+            for (var key in radioArray){
+                keyArray=key.split("_");
+                htmlElementsArray[key]= document.getElementById('element'+keyArray[3]).getContext('2d');
+            }
+            for (var key in radioArray){
+                labels=[];
+                for (var label in radioArray[key])
+                    labels.push(label);
+                keyArray=key.split("_");
+
+                let data=[];
+
+                for (var dataVal in radioArray[key]){
+                    data.push(radioArray[key][dataVal]);
+                }
+                label=formArray.elements[keyArray[3]][2];
+                chartArray[key]=new Chart("element"+keyArray[3],{
+                    type: 'polarArea',
+                    data: {
+                        labels: labels ,
+                        datasets: [{
+                            label: label,
+                            data: data,
+                            backgroundColor:
+                                palette('tol', data.length).map(function(hex) {
+                                    return '#' + hex;
+                                })
+                        }]
+                    },
+                    options: {}
+                });
+            }
+            if (formInfoArray.length==0){
+                $("#graph-container").html("<span style='position: fixed;top: 39%; right: 18%;'><strong style='font-size:50px; text-shadow: black 1.7px 1.7px'>No data<strong></span>");
+                $("#table-container").html("<span style='position: fixed;top: 39%; left: 18%;'><strong style='font-size:50px; text-shadow: black 1.7px 1.7px'>No data<strong></span>");
+            }
+            var numElements=0;
+            for (var element in radioArray)
+            numElements++;
+            if (numElements==0){
+                $("#graph-container").html("<span style='position: fixed;top: 39%; right: 18%;'><strong style='font-size:50px; text-shadow: black 1.7px 1.7px'>No data<strong></span>");
+            }
+            console.log(radioArray);
+        }
+
     </script>
 </body>
 </html>

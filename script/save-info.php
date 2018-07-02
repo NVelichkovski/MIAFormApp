@@ -20,6 +20,6 @@
     $stmt=$stmt.');';
 
     if (!mysqli_query($conn,$stmt))
-        echo "There is a problem with submitting the form";
-    else echo "The form is submitted";
+        echo mysqli_error($conn);
+    else header("Location: http://localhost:63342/MIAFormApp/front/submit.html");
 

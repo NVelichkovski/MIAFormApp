@@ -7,10 +7,6 @@
     <link rel="stylesheet" href="FormGeneratorCSS.css">
     <link rel="stylesheet" href="MediaQueries_FormGenerator.css">
 
-    <link rel="stylesheet" href="jquery-ui.min.css">
-    <script src="external/jquery/jquery.js"></script>
-    <script src="jquery-ui.min.js"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="clickTitle.js"></script>
 
@@ -26,13 +22,12 @@
     });
     </script>
 
-    <link rel="stylesheet" href="../front/MediaQueries_Footer.css">
   </head>
   <body>
     <div id="form_div">
       <form id="custom_form" method="post">
         <div id="content">
-          <textarea id="naslov" name="Title" rows="1" cols="40" placeholder="Title" onchange="updateTitle()"></textarea>
+          <textarea id="naslov" name="Title" rows="1" cols="40" placeholder="Title"></textarea>
           <br>
         </div>
         <div class="custom_form">
@@ -50,7 +45,6 @@
           <option value="5">E-mail</option>
           <option value="6">Textarea</option>
         </select>
-        <script src="array-creator.js"></script>
         <script src="GetSelected.js"></script>
         <button id="add_button" type="button" name="button">Add element</button>
       </div>
@@ -104,10 +98,7 @@
    <script type="text/javascript" src="ime_checkbox.js"></script>
    <br>
 
-
+  <script>
+  </script>
   </body>
-  <div class="footer">
-    <footer id="footer_eden">WebForms &copy; 2018</footer>
-    <footer id="footer_dva">Created by students on FEIT-Skopje: Neceva M. / Velichkovski N. / Shushlevska M. / Senchuk I.</footer>
-  </div>
 </html>

@@ -51,7 +51,7 @@
             $returnString.='
                 <li>
                     <input class="radio-button" type="radio" name="'.$identifier.'_3" value="'.str_replace(" ","_",$value).'" id="'.$identifier."_".$key.'">
-                    <label for="'.$identifier.'_3">'.$label.'</label>
+                    <label for="'.$identifier.'_3">'.$elementArray[$key].'</label>
                 </li>';
         }
         $returnString.='</ul></div>';
@@ -70,39 +70,15 @@
             }
             $returnString.='
                 <li>
-                    <input class="checkbox" type="checkbox" name="'.$identifier."_4_".$key.'" value="'.str_replace(" ","_",$value).'" id="'.$identifier."_".$key.'_4">
-                    <label for="'.$identifier."_".$key.'_4">'.$label.'</label>
+                    <input class="checkbox" type="checkbox" name="'.$identifier.'_'.$key.'_4" value="'.str_replace(" ","_",$value).'" id="'.$identifier."_".$key.'_4">
+                    <label for="'.$identifier."_".$key.'_4">'.$elementArray[$key].'</label>
                 </li>';
         }
         $returnString.='</ul></div>';
         return $returnString;
     }
 
-    $formArray = array(
-        'title' => 'Form-Title',
-        'elements'=> array(
-            array(TEXT_FIELD, 'text field label'),
-            array(TEXT_AREA, 'text area label'),
-            array(
-                RADIO_BUTTON,
-                'Radio button label',
-                '1 radio button label',
-                '2 radio button label',
-                '3 radio button label'
-            ),
-            array(
-                CHECK_BOX,
-                'Check box label',
-                '1 combo box label',
-                '2 combo box label',
-                '3 combo box label'
-            ),
-            array(DATE_FIELD, "date field label"),
-            array(EMAIL_FIELD, "email field label")
-            )
-        );
-
-//        $formArray=json_decode($_POST['form-array']);
+        $formArray=json_decode($_POST['form_array'], True);
         if (!isset($formArray))
         {
             $_SESSION['error']="Form array is not set";
@@ -140,10 +116,11 @@
         <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Form</title>
+        <title>WebForms</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-        <script src="main.js"></script>
+        <link rel="stylesheet" href="../../form/IndexCSS.css">
+        
+        <link rel="icon" href="../../form/form.ico">
         <script>
         var formArray=JSON.parse(\''.$arrayJSON.'\');
         </script>
@@ -151,7 +128,8 @@
     <body>
     <form action="../../../script/save-info.php" method="post">
     <fieldset>
-    <legend>'.$formArray['title'].'</legend>
+    <legend id="title">'.$formArray['title'].'</legend>
+    <div class="form-element">
     ';
     foreach ($formArray['elements'] as $key => $value) {
         switch ($value[0]) {
@@ -177,6 +155,7 @@
     }
 
     $formString.='
+    </div>
     <br>
     <button type="submit">Submit</button>
     </fieldset>

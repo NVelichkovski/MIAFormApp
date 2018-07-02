@@ -56,7 +56,8 @@ function LogInCheck()
     success: function(data)
     {
         if(data=='false'){
-          window.location.assign("../front/formlist.html.php");
+
+          window.location.assign("http://localhost:63342/MIAFormApp/front/formlist.html.php");
         }else{
           if(data==="password")
               toastr.error("Incorect password","Log in problem")
